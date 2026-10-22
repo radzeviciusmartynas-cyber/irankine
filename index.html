@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Seniūno ir atstovo įrankinė</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: phone-first app, sticky top bar, one column of tools, bottom tab bar. KK teal as the brand ground, yellow highlighter for "what to fix". */
+:root{
+  --paper:#F2F7F5; --card:#FFFFFF; --ink:#10302A; --ink-2:#4B645E; --line:#D3E3DE;
+  --kk:#5FB7A5; --kk-soft:#DDF1EC; --teal:#1C7262; --on-kk:#0B2A24;
+  --mark:#F7D96F; --mark-ink:#3D3000;
+  --good:#23824A; --good-soft:#DCF2E3; --warn:#A76A12; --warn-soft:#FBEED3; --bad:#B9422B; --bad-soft:#F8E1DB;
+  --bubble:#FFFFFF; --bubble-me:#D6EFE8;
+  --shadow:0 1px 2px rgba(16,48,42,.06),0 6px 20px rgba(16,48,42,.06);
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --r:14px; --r-sm:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0B1916; --card:#132621; --ink:#E5F1ED; --ink-2:#9CB7B0; --line:#25413A;
+  --kk:#3F9B88; --kk-soft:#173A33; --teal:#7FD5C2; --on-kk:#06201B;
+  --mark:#D9B94A; --mark-ink:#1F1800;
+  --good:#5CC481; --good-soft:#163A26; --warn:#E3AC4E; --warn-soft:#3A2C12; --bad:#F0806A; --bad-soft:#3C1E18;
+  --bubble:#1A322C; --bubble-me:#1E4A40; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#0B1916; --card:#132621; --ink:#E5F1ED; --ink-2:#9CB7B0; --line:#25413A;
+  --kk:#3F9B88; --kk-soft:#173A33; --teal:#7FD5C2; --on-kk:#06201B;
+  --mark:#D9B94A; --mark-ink:#1F1800;
+  --good:#5CC481; --good-soft:#163A26; --warn:#E3AC4E; --warn-soft:#3A2C12; --bad:#F0806A; --bad-soft:#3C1E18;
+  --bubble:#1A322C; --bubble-me:#1E4A40; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--kk)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(1.9rem,7vw,2.6rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+a{color:var(--teal)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--kk);color:var(--on-kk)}
+.appbar .in{max-width:720px;margin:0 auto;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+.brand span{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.datechip{font-family:var(--f-mono);font-size:.78rem;background:rgba(255,255,255,.35);padding:4px 9px;border-radius:999px;white-space:nowrap}
+
+main{max-width:720px;margin:0 auto;padding-block:20px calc(96px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.view{display:flex;flex-direction:column;gap:28px}
+.hero{display:flex;flex-direction:column;gap:10px;padding-top:4px}
+.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.lead{color:var(--ink-2);font-size:1.02rem;max-width:60ch}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sec-head{display:flex;flex-direction:column;gap:4px}
+.sec-head p{color:var(--ink-2);font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow);min-width:0}
+.muted{color:var(--ink-2)}
+.small{font-size:.86rem}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--kk-soft);color:var(--teal);width:max-content}
+.tag.ex{background:var(--mark);color:var(--mark-ink)}
+
+/* segmented chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin-inline:-2px;padding-inline:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;font-weight:600;font-size:.92rem;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;gap:8px}
+.chip .n{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip[aria-pressed="true"] .n{color:var(--paper);opacity:.75}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:600;cursor:pointer}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:var(--paper)}
+.btn.ghost{background:transparent}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:.88rem;border-radius:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-weight:600;font-size:.9rem}
+.field .hint{font-size:.8rem;color:var(--ink-2)}
+input[type=text],input[type=email],input[type=date],select,textarea{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:var(--r-sm);padding:11px 12px;font-size:16px;min-height:46px}
+textarea{min-height:96px;resize:vertical;line-height:1.45}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:460px){.grid2{grid-template-columns:1fr}}
+.counter{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2)}
+.counter.over{color:var(--bad);font-weight:500}
+
+/* TIKSLAS tiles, the page's signature */
+.tiles{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.tile{aspect-ratio:3/4;max-width:100%;border-radius:10px;background:var(--card);border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:var(--f-display);font-weight:800;font-size:clamp(1.3rem,6vw,2rem);transition:background .25s,border-color .25s,color .25s;position:relative;cursor:default}
+.tile small{font-family:var(--f-body);font-size:.6rem;font-weight:700;color:var(--ink-2);max-width:100%;overflow:hidden;text-overflow:clip;white-space:nowrap}
+.tile.on{background:var(--kk);border-color:var(--kk);color:var(--on-kk)}
+.tile.on small{color:var(--on-kk);opacity:.8}
+.tile.miss{background:var(--mark);border-color:var(--mark);color:var(--mark-ink)}
+.tile.miss small{color:var(--mark-ink)}
+button.tile{cursor:pointer;padding:0;min-width:0;font:inherit;font-family:var(--f-display);font-weight:800;font-size:clamp(1.3rem,6vw,2rem);color:var(--ink)}
+.legend{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.93rem}
+.legend b{font-family:var(--f-display);font-weight:800;color:var(--teal);width:1.4em;text-align:center}
+
+/* email envelope */
+.env{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.env-h{display:grid;grid-template-columns:4.4em 1fr;gap:4px 10px;padding:12px 14px;background:var(--kk-soft);font-size:.88rem;border-bottom:1px solid var(--line)}
+.env-h dt{font-family:var(--f-mono);font-size:.76rem;color:var(--ink-2);padding-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.env-h dd{margin:0;font-weight:600;min-width:0;overflow-wrap:anywhere}
+.env-b{padding:14px;white-space:pre-wrap;font-size:.97rem;overflow-wrap:anywhere}
+.env-b.mono{font-family:var(--f-mono);font-size:.86rem;line-height:1.6}
+.sick .env-b{font-family:var(--f-body)}
+.sig{background:#FFFFFF;color:#666666;border:1px solid var(--line);border-radius:var(--r);padding:16px;overflow-wrap:anywhere;box-shadow:var(--shadow)}
+.sig img{max-width:100%}
+details summary{cursor:pointer;font-weight:600;padding:4px 0}
+details[open] summary{margin-bottom:6px}
+.meta{font-family:var(--f-mono);font-size:.76rem;color:var(--bad);padding:8px 14px;border-top:1px dashed var(--line)}
+
+/* chat */
+.chat{background:var(--kk-soft);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line)}
+.chat-top{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink-2);font-weight:600;padding:0 4px 4px}
+.msg{max-width:86%;display:flex;flex-direction:column;gap:2px}
+.msg .who{font-size:.74rem;font-weight:700;color:var(--teal);padding-left:10px}
+.msg .b{background:var(--bubble);border-radius:16px 16px 16px 4px;padding:8px 12px;font-size:.95rem;box-shadow:0 1px 1px rgba(0,0,0,.05);overflow-wrap:anywhere}
+.msg .b.img{border:1.5px dashed var(--ink-2);background:transparent;font-style:italic;color:var(--ink-2)}
+.msg.me{align-self:flex-end}
+.msg.me .who{text-align:right;padding-right:10px}
+.msg.me .b{background:var(--bubble-me);border-radius:16px 16px 4px 16px}
+
+/* lists, steps */
+.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ticks li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.ticks li::before{content:"";width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--kk);mask:none}
+.ticks.no li::before{background:var(--bad);border-radius:4px;transform:rotate(45deg) scale(.72)}
+.check{display:flex;flex-direction:column;gap:2px}
+.check label{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;padding:9px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.check label:last-child{border-bottom:0}
+.check input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--kk)}
+.stairs{display:flex;flex-direction:column;gap:6px}
+.stair{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stair .k{font-family:var(--f-display);font-weight:800;font-size:1.4rem;color:var(--teal);text-align:center}
+.stair:nth-child(2){margin-left:12px}.stair:nth-child(3){margin-left:24px}.stair:nth-child(4){margin-left:36px}
+.stair p{font-size:.93rem}
+.stairs.flat .stair{margin-left:0}
+.steps{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cycle button{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;min-height:64px}
+.cycle button b{font-family:var(--f-display);font-weight:800;font-size:.98rem}
+.cycle button span{font-size:.7rem;color:var(--ink-2);font-weight:600}
+.cycle button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.cycle button[aria-pressed="true"] span{color:var(--paper);opacity:.75}
+
+/* phrase cards */
+.phr{display:flex;flex-direction:column;gap:6px}
+.phr button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 12px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.phr button span.c{font-size:.72rem;color:var(--ink-2);font-weight:600;white-space:nowrap}
+.phr.bad button{background:var(--bad-soft);border-color:transparent;cursor:default}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+
+/* template */
+.tpl pre{margin:0;font-family:var(--f-mono);font-size:.83rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--paper);border-radius:var(--r-sm);padding:12px;border:1px solid var(--line)}
+.tpl summary{cursor:pointer;font-weight:700;font-family:var(--f-display);font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tpl summary::-webkit-details-marker{display:none}
+.tpl summary::after{content:"+";font-family:var(--f-mono);font-size:1.2rem;color:var(--teal)}
+.tpl[open] summary::after{content:"–"}
+.tpl .when{font-size:.84rem;color:var(--ink-2);font-family:var(--f-body);font-weight:500}
+
+/* facts table */
+.facts{width:100%;border-collapse:collapse;font-size:.92rem}
+.facts td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.facts td:first-child{font-weight:600;width:38%}
+.facts td .pt{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);white-space:nowrap}
+.tablewrap{overflow-x:auto}
+
+/* status pills */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;padding:4px 10px;border-radius:999px}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.alert{border-radius:12px;padding:10px 12px;font-size:.9rem;background:var(--warn-soft);color:var(--ink)}
+.alert b{color:var(--warn)}
+
+/* role cards */
+.role{border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;border:2px solid var(--kk)}
+.role.b{border-color:var(--mark);background:linear-gradient(var(--card),var(--card))}
+.role .rl{font-family:var(--f-display);font-weight:800;font-size:2.2rem;line-height:1;color:var(--teal)}
+.role.b .rl{color:var(--warn)}
+.secret{border:1.5px dashed var(--ink-2);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+/* quiz */
+.qbar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--kk);width:100%;transition:width .1s linear}
+.qopts{display:grid;grid-template-columns:1fr;gap:8px}
+.qopt{text-align:left;padding:14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);font-weight:600;cursor:pointer;min-height:52px;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center}
+.qopt .l{font-family:var(--f-display);font-weight:800;color:var(--teal)}
+.qopt.right{background:var(--good-soft);border-color:var(--good)}
+.qopt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.qopt:disabled{cursor:default}
+.score{font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,16vw,5rem);line-height:1;color:var(--teal);font-variant-numeric:tabular-nums}
+
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabbar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 9px;border:0;background:transparent;cursor:pointer;color:var(--ink-2);font-size:.7rem;font-weight:700;letter-spacing:.02em;min-height:58px}
+.tab svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab[aria-current="page"]{color:var(--teal)}
+.tab[aria-current="page"] svg{stroke-width:2.3}
+
+/* toast + fallback */
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding-block:16px calc(16px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-shadow:0 -10px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;gap:10px}
+.sheet textarea{min-height:180px;font-family:var(--f-mono);font-size:14px}
+.ticket{display:grid;grid-template-columns:1fr auto;gap:4px 12px;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
+.ticket .t1{font-family:var(--f-display);font-weight:800;font-size:1.25rem}
+.ticket .t2{font-family:var(--f-mono);font-size:.82rem;opacity:.8}
+.ticket .stamp{grid-row:1 / span 2;grid-column:2;align-self:center;font-family:var(--f-display);font-weight:800;font-size:2.4rem;color:var(--kk);line-height:1}
+.ticket::after{content:"";position:absolute;right:86px;top:10px;bottom:10px;border-left:2px dashed rgba(255,255,255,.25)}
+.tasklist{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+.tasklist button{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;padding:12px 14px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer}
+.tasklist button:last-child{border-bottom:0}
+.tasklist .num{font-family:var(--f-display);font-weight:800;font-size:1.5rem;color:var(--teal)}
+.tasklist .tt{font-weight:700}
+.tasklist .ts{font-size:.84rem;color:var(--ink-2)}
+.tasklist .tm{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-2)}
+.divider{height:1px;background:var(--line);border:0;margin:4px 0}
+.src{font-size:.8rem;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="appbar"><div class="in">
+  <div class="brand"><span>Kauno kolegija</span><b>Efektyvi komunikacija</b></div>
+  <div class="datechip">2026-10-23</div>
+</div></header>
+
+<main>
+
+<!-- ============ MOKYMAI ============ -->
+<section class="view" id="mokymai" data-view>
+  <div class="hero">
+    <div class="eyebrow">Seniūnams ir studentų atstovams</div>
+    <h1>Trys įgūdžiai per 90 minučių</h1>
+    <p class="lead">Čia rasite visas šiandienos užduotis. Po mokymų skiltys apačioje lieka jūsų kasdieniai įrankiai: laiškų konstruktorius, šablonai, chato taisyklės ir posėdžių atmintinė.</p>
+  </div>
+  <div class="ticket">
+    <div class="t1">Pramonės pr. 22A, 202 aud.</div>
+    <div class="t2">Spalio 23 d., 14:30–16:00<br>Martynas Radzevičius</div>
+    <div class="stamp">90′</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label for="team">Jūsų komandos pavadinimas</label>
+      <input type="text" id="team" placeholder="pvz., Šauksmininkai" autocomplete="off">
+      <span class="hint">Jis bus rodomas viktorinoje. Visa, ką čia įrašote, lieka tik jūsų telefone.</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="chips" id="taskchips" role="group" aria-label="Užduotys"></div>
+    <div id="taskbody" class="sec"></div>
+  </div>
+</section>
+
+<!-- ============ LAIŠKAI ============ -->
+<section class="view" id="laiskai" data-view hidden>
+  <div class="hero">
+    <div class="eyebrow">Dalykiniai laiškai</div>
+    <h1>Laiškas, kurį atidaro pirmą</h1>
+    <p class="lead">Geras laiškas yra tas, kurį gavėjas supranta ir gali atsakyti per 30 sekundžių. Septynios raidės, kurias verta patikrinti prieš spaudžiant „Siųsti“.</p>
+  </div>
+  <div class="card">
+    <div class="tiles" aria-label="TIKSLAS formulė">
+      <div class="tile on">T<small>tema</small></div><div class="tile on">I<small>kas</small></div><div class="tile on">K<small>kreip.</small></div><div class="tile on">S<small>esmė</small></div><div class="tile on">L<small>trumpai</small></div><div class="tile on">A<small>terminas</small></div><div class="tile on">S<small>parašas</small></div>
+    </div>
+    <div class="legend">
+      <b>T</b><span><strong>Tema:</strong> grupė, prašymas ir data.</span>
+      <b>I</b><span><strong>Kas rašo:</strong> vardas, pavardė, grupė, pareigos.</span>
+      <b>K</b><span><strong>Kreipinys</strong> vardu, šauksmininku: „Laba diena, Rasa,“. Mokslo laipsnių kreipinyje nerašome.</span>
+      <b>S</b><span><strong>Esmė</strong> pirmame sakinyje, ne istorijos pabaigoje.</span>
+      <b>L</b><span><strong>Trumpai:</strong> viena tema, iki 150 žodžių.</span>
+      <b>A</b><span><strong>Terminas:</strong> ko prašote ir iki kada.</span>
+      <b>S</b><span><strong>Parašas</strong> su pareigomis. Prieš siųsdami patikrinkite gavėją, priedus ir toną.</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Laiško konstruktorius</h2><p>Užpildykite laukus, ir laiškas susidėlios pats. Raidės užsidegs, kai jų netrūks.</p></div>
+    <div class="card">
+      <span class="tag ex">Pavyzdys: pakeiskite savo duomenimis</span>
+      <div class="tiles" id="lbTiles"></div>
+      <div class="grid2">
+        <div class="field"><label for="lbPrefix">Grupė ar organas</label><input type="text" id="lbPrefix"></div>
+        <div class="field"><label for="lbDate">Atsakymo reikia iki</label><input type="date" id="lbDate"></div>
+      </div>
+      <div class="field"><label for="lbTema">Tema: ko prašote trumpai</label><input type="text" id="lbTema"></div>
+      <div class="field"><label for="lbSurname">Gavėjo vardas (vardininku)</label><input type="text" id="lbSurname" placeholder="pvz., Rasa arba Martynas"><span class="hint" id="lbVocHint">Kolegijoje kreipiamės vardu, be mokslo laipsnių. Nežinote gavėjo? Palikite tuščią.</span></div>
+      <div class="field"><label for="lbMain">Svarbiausias sakinys</label><textarea id="lbMain" rows="4"></textarea></div>
+      <div class="field"><label for="lbFacts">Faktai: datos, dalykas, kiek žmonių liečia</label><textarea id="lbFacts" rows="2"></textarea></div>
+      <div class="field"><label for="lbOffer">Siūlomas sprendimas ar variantai</label><textarea id="lbOffer" rows="2"></textarea></div>
+      <div class="grid2">
+        <div class="field"><label for="lbName">Jūsų vardas ir pavardė</label><input type="text" id="lbName"></div>
+        <div class="field"><label for="lbRole">Jūsų pareigos</label><input type="text" id="lbRole"></div>
+      </div>
+      <div class="row"><button class="btn ghost sm" id="lbClear">Išvalyti pavyzdį</button><button class="btn ghost sm" id="lbReset">Grąžinti pavyzdį</button></div>
+    </div>
+    <div class="env">
+      <dl class="env-h"><dt>Tema</dt><dd id="lbOutSubj"></dd></dl>
+      <div class="env-b" id="lbOutBody"></div>
+    </div>
+    <div class="row"><button class="btn primary" id="lbCopySubj">Kopijuoti temą</button><button class="btn primary" id="lbCopyBody">Kopijuoti laišką</button><span class="counter" id="lbCount"></span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Šauksmininko tikrintuvas</h2><p>Dažniausia lietuviškų laiškų klaida yra kreipinys vardininku. Įrašykite vardą ir pavardę.</p></div>
+    <div class="card">
+      <div class="field"><label for="vocIn">Vardas ir (ar) pavardė</label><input type="text" id="vocIn" value="Darius Vaitkus" autocomplete="off"></div>
+      <div class="phr" id="vocOut"></div>
+      <div class="tablewrap"><table class="facts small">
+        <tr><td>-as → -ai</td><td>Petrauskas → Petrauskai, Martynas → Martynai</td></tr>
+        <tr><td>-is / -ys → -i / -y</td><td>Jonaitis → Jonaiti, Kazys → Kazy</td></tr>
+        <tr><td>-us / -ius → -au / -iau</td><td>Vaitkus → Vaitkau, Darius → Dariau</td></tr>
+        <tr><td>-ė → -e</td><td>Kazlauskienė → Kazlauskiene, Jonaitytė → Jonaityte</td></tr>
+        <tr><td>-a → -a</td><td>Ieva, Rūta, Rasa nesikeičia</td></tr>
+      </table></div>
+      <p class="small muted">Kolegijoje įprasta kreiptis vardu, be „dr.“ ar „prof.“. Pavardė tinka oficialiam raštui ar nepažįstamam adresatui. Tikrintuvas taiko dažniausias taisykles, todėl užsienietiškų ir retų vardų formą patikrinkite patys.</p>
+    </div>
+  </div>
+
+  <div class="sec" id="parasas">
+    <div class="sec-head"><h2>El. pašto parašas</h2><p>Pagal Kolegijos standartą. Susikurkite vieną kartą, ir jis bus kiekviename laiške.</p></div>
+    <div class="card">
+      <span class="tag ex">Pavyzdys: pakeiskite savo duomenimis</span>
+      <div class="grid2">
+        <div class="field"><label for="sgName">Vardas ir pavardė</label><input type="text" id="sgName" autocomplete="name"></div>
+        <div class="field"><label for="sgGroup">Grupė</label><input type="text" id="sgGroup"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="sgRole">Pareigos <span class="hint">(nebūtina)</span></label><input type="text" id="sgRole"></div>
+        <div class="field"><label for="sgPhone">Telefonas <span class="hint">(nebūtina)</span></label><input type="text" id="sgPhone" inputmode="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="sgMail">Kolegijos el. paštas</label><input type="email" id="sgMail" autocomplete="email"></div>
+      <div class="sig" id="sgOut" aria-live="polite"></div>
+      <div class="row"><button class="btn primary sm" id="sgCopy">Kopijuoti parašą su logotipais</button><button class="btn sm" id="sgCopyTxt">Kopijuoti tik tekstą</button></div>
+      <p class="small muted">Seniūnui ar atstovui pareigas verta įrašyti, pvz., „Grupės seniūnas“ arba „Studentų atstovas studijų krypties komitete“. Pasikeitus pareigoms, parašą atnaujinkite.</p>
+    </div>
+    <div class="card">
+      <h3>Kaip įdėti parašą į Gmail</h3>
+      <ol class="small steps">
+        <li>Čia spauskite „Kopijuoti parašą su logotipais“.</li>
+        <li>Kompiuteryje atidarykite Gmail, spauskite krumpliaratį, tada „Žiūrėti visus nustatymus“ (See all settings).</li>
+        <li>Skirtuke „Bendra“ (General) raskite „Parašas“ (Signature), spauskite „Kurti naują“ ir parašo lauke įklijuokite (Ctrl+V arba Cmd+V).</li>
+        <li>Skiltyje „Parašo numatytieji nustatymai“ pasirinkite jį naujiems laiškams ir atsakymams.</li>
+        <li>Puslapio apačioje spauskite „Išsaugoti pakeitimus“ (Save Changes). Nusiųskite laišką sau ir pažiūrėkite, kaip atrodo.</li>
+      </ol>
+      <p class="small muted">Telefone Gmail programėlės parašas būna tik tekstinis. Spauskite „Kopijuoti tik tekstą“, tada programėlėje atidarykite Nustatymai, pasirinkite paskyrą ir įklijuokite į „Parašas mobiliesiems“ (Android) arba „Parašo nustatymai“ (iPhone).</p>
+      <details class="small">
+        <summary>Logotipai neįsikėlė?</summary>
+        <p class="muted">Gmail parašo lauke spauskite paveikslėlio piktogramą, pasirinkite „Žiniatinklio adresas (URL)“ ir įklijuokite adresą:</p>
+        <div class="row"><button class="btn sm" data-copy-url="kk">Kolegijos logotipo adresas</button><button class="btn sm" data-copy-url="uni">UNINOVIS logotipo adresas</button></div>
+      </details>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Šablonai</h2><p>Laukus [laužtiniuose skliaustuose] pakeiskite savo informacija. Jei Gmail parašas įjungtas, šablono pabaigą nuo „Pagarbiai“ ištrinkite: parašas atsiras pats.</p></div>
+    <div id="mailTpl" class="sec"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Smulkmenos, kurias pastebi visi</h2></div>
+    <div class="two">
+      <div class="card"><h3>Taip</h3><ul class="ticks small">
+        <li>Rašote iš Kolegijos el. pašto, ne iš „tomuxas2005“.</li>
+        <li>Kreipiatės vardu: „Laba diena, Rasa,“.</li>
+        <li>Po kreipinio su kableliu laiškas tęsiamas mažąja raide.</li>
+        <li>„Jūs“ ir „Jūsų“, kreipiantis į gavėją, rašote didžiąja raide.</li>
+        <li>Po „Pagarbiai“ kablelio nėra.</li>
+        <li>Neatsakė? Po 2–3 darbo dienų mandagiai priminkite toje pačioje gijoje.</li>
+      </ul></div>
+      <div class="card"><h3>Ne</h3><ul class="ticks no small">
+        <li>„SKUBU!!!“, didžiosios raidės, šypsenėlės.</li>
+        <li>Keli klausimai viename laiške: atsakymas ateis tik į vieną.</li>
+        <li>Mokslo laipsniai kreipinyje („Gerb. doc. dr.“). Kolegijoje tai neįprasta.</li>
+        <li>„Atsakyti visiems“, kai rašote vienam žmogui.</li>
+        <li>Grupės vardu, kai grupė nesutarė.</li>
+        <li>Dirbtinio intelekto tekstas be redagavimo: per ilgas ir per oficialus.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Naudinga žinoti rašant dėl studijų</h2></div>
+    <div class="card tablewrap" style="padding:6px 12px">
+      <table class="facts">
+        <tr><td>Vertinimo kriterijai <span class="pt">68 p.</span></td><td>Dėstytojas su dalyko ar modulio tikslais ir vertinimu supažindina pirmojo užsiėmimo metu.</td></tr>
+        <tr><td>Termino pratęsimas <span class="pt">72 p.</span></td><td>Dėl svarbios pateisinamos priežasties akademinio padalinio vadovo sprendimu atsiskaitymo terminas gali būti pratęstas.</td></tr>
+        <tr><td>Kur kreiptis <span class="pt">110.9 p.</span></td><td>Studentas gali kreiptis į Kolegijos administraciją ar Ginčų nagrinėjimo komisiją dėl savo teisėtų interesų pažeidimo.</td></tr>
+      </table>
+    </div>
+    <p class="src">Pagal <a href="https://www.kaunokolegija.lt/kk_wp_content/uploads/2025/09/KK-studiju-tvarka_2025-05-29_galutinis.pdf" target="_blank" rel="noopener">KK studijų tvarką</a> (2025-06-02 redakcija). Prieš remdamiesi punktu, pasitikrinkite aktualią redakciją.</p>
+  </div>
+</section>
+
+<!-- ============ CHATAS ============ -->
+<section class="view" id="chatas" data-view hidden>
+  <div class="hero">
+    <div class="eyebrow">Socialiniai tinklai ir grupės chatas</div>
+    <h1>Chatas yra vieša erdvė</h1>
+    <p class="lead">Seniūno ar atstovo žinutė grupėje skamba kaip oficiali, o bet kuri žinutė gali tapti ekrano nuotrauka. Taisyklės ir atsakymai, kurie veikia.</p>
+  </div>
+
+  <div class="card">
+    <h3>Dekano stalo testas</h3>
+    <ol class="small" style="margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px">
+      <li>Ar būtų gerai, jei ši žinutė atsidurtų ant dėstytojo ar dekano stalo?</li>
+      <li>Ar joje nėra kito žmogaus pažymių, kontaktų ar nuotraukų be sutikimo?</li>
+      <li>Ar tai tikrai reikia žinoti visiems ir būtent dabar?</li>
+    </ol>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Kur ką rašyti</h2></div>
+    <div class="tablewrap"><table class="facts card" style="padding:4px 12px">
+      <tr><td>Kolegijos el. paštas</td><td>Oficialūs prašymai ir viskas, kam reikia įrodymo. Netinka skubiems klausimams.</td></tr>
+      <tr><td>Moodle ir Kolegijos sistemos</td><td>Oficiali informacija: tvarkaraštis, atsiskaitymai, įvertinimai, dalykų medžiaga.</td></tr>
+      <tr><td>Grupės „info“ kanalas</td><td>Rašo tik seniūnas: svarbūs pranešimai su terminais, prisegti. Diskusijų nėra.</td></tr>
+      <tr><td>Grupės pokalbių chatas</td><td>Greiti klausimai ir bendravimas. Netinka konfliktams, asmens duomenims ir skundams.</td></tr>
+      <tr><td>Vieši tinklai</td><td>Grupės ir Kolegijos pasiekimai, renginiai. Netinka skundams dėstytojams ir kitų nuotraukoms be sutikimo.</td></tr>
+    </table></div>
+    <div class="card">
+      <h3>Kaip susikurti „info“ kanalą</h3>
+      <ul class="ticks small">
+        <li><span><strong>WhatsApp.</strong> Bendruomenė su skelbimų grupe arba grupės nustatymuose leisti siųsti žinutes tik administratoriams.</span></li>
+        <li><span><strong>Telegram.</strong> Kanalas, kuriame rašo tik administratorius, o pokalbiai vyksta atskiroje grupėje.</span></li>
+        <li><span><strong>Messenger.</strong> Atskiras pokalbis tik pranešimams ir susitarimas, kad jame rašo tik seniūnas. Svarbias žinutes prisekite.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Grupės chato taisyklės</h2><p>Nukopijuokite, pakoreguokite ir prisekite savo grupėje dar šį vakarą.</p></div>
+    <div class="card tpl"><pre id="rulesText">Mūsų grupės chato taisyklės
+1. Svarbi informacija yra „Info“ kanale, ją prisegu aš. Pokalbiai vyksta čia.
+2. @visi tik svarbiems dalykams ir ne vėliau kaip 21 val.
+3. Kitų pažymių, kontaktų, nuotraukų ir paskaitų įrašų be sutikimo nekeliam.
+4. Ginčus sprendžiam asmeniškai, ne bendrame chate.
+5. Pirmiausia ieškom Moodle. Neradai? Rašyk man, atsakau darbo dienomis iki 20 val.</pre>
+      <div class="row"><button class="btn primary" data-copy="rulesText">Kopijuoti taisykles</button></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Atstovams: soc. tinklai ir BDAR</h2><p>Jūsų įrašas net asmeninėje paskyroje skamba kaip Studentų atstovybės pozicija.</p></div>
+    <div class="two">
+      <div class="card"><h3>Galima</h3><ul class="ticks small">
+        <li>Savo nuotraukos ir mintys.</li>
+        <li>Paskelbti sprendimai su nuoroda į šaltinį.</li>
+        <li>Renginių anonsai.</li>
+        <li>Nuotraukos, kai visi kadre sutiko.</li>
+      </ul></div>
+      <div class="card"><h3>Nekeliame</h3><ul class="ticks no small">
+        <li>Posėdžių projektai ir konfidenciali medžiaga.</li>
+        <li>Pažymiai, sąrašai, kontaktai.</li>
+        <li>Paskaitų nuotraukos ir įrašai be dėstytojo sutikimo.</li>
+        <li>Kolegijos kritika, neišnaudojus vidinių kelių.</li>
+      </ul></div>
+    </div>
+    <div class="card"><h3>Pirma paklausk</h3><p class="small">Nuotraukos, kuriose atpažįstami kiti, ekrano nuotraukos iš chato, citatos iš posėdžio ir kitų žmonių žymėjimai.</p></div>
+    <div class="card">
+      <h3>BDAR per 60 sekundžių</h3>
+      <ul class="ticks small">
+        <li><span><strong>Atpažįstamas žmogus yra asmens duomenys:</strong> veidas nuotraukoje, balsas, el. paštas, vardas su pažymiu.</span></li>
+        <li><span><strong>Rink tik tai, ko reikia.</strong> Anoniminėje apklausoje nerinkite vardų ir el. paštų, jei jų nereikia.</span></li>
+        <li><span><strong>Klausk prieš fotografuodamas ir keldamas.</strong> Leiskite nenorintiems likti už kadro, žymėkite tik sutikusius.</span></li>
+        <li><span><strong>Ištrink, kai nebereikia:</strong> sąrašus, apklausų failus, ekrano nuotraukas telefone.</span></li>
+        <li><span><strong>Nutekėjo?</strong> Ištrinkite, informuokite atsakingą asmenį ir Kolegijos duomenų apsaugos pareigūną: dap@go.kauko.lt.</span></li>
+      </ul>
+      <p class="src">KK asmens duomenų tvarkymo aprašas (2024-12-20 Nr. 1-594), 13.1 p.: nuotraukoms ir informacijai apie renginių dalyvius reikia sutikimo.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Ką sako Kolegijos dokumentai</h2></div>
+    <div class="card tablewrap" style="padding:6px 12px">
+      <table class="facts">
+        <tr><td>Nuotraukos ir įrašai <span class="pt">EK 30.15</span></td><td>Filmuoti ar fotografuoti per paskaitą, egzaminą ar konsultaciją be dėstytojo sutikimo yra pažeidimas.</td></tr>
+        <tr><td>Įvertinimai <span class="pt">ST 66 p.</span></td><td>Vertinimo rezultatai skelbiami laikantis konfidencialumo.</td></tr>
+        <tr><td>Kitų informacija <span class="pt">EK 31.3</span></td><td>Konfidencialios informacijos apie kitus neskleidžiame.</td></tr>
+        <tr><td>Vieša kritika <span class="pt">EK 14.11</span></td><td>Viešai aptarinėti Kolegijos problemas, neišnaudojus vidinių galimybių, yra pažeidimas.</td></tr>
+        <tr><td>Reputacija <span class="pt">EK 10.9</span></td><td>Bendruomenės nariai saugo Kolegijos reputaciją, taip pat ir socialiniuose tinkluose.</td></tr>
+      </table>
+    </div>
+    <p class="src">EK: <a href="https://www.kaunokolegija.lt/kk_wp_content/uploads/sites/5/2022/11/Akadem_etikos_kodeksas_nauja_redakcija_20221006-EN.pdf" target="_blank" rel="noopener">Akademinės etikos kodeksas</a> (2022-10-06 redakcija, straipsniai pagal oficialų vertimą į anglų kalbą). ST: <a href="https://www.kaunokolegija.lt/kk_wp_content/uploads/2025/09/KK-studiju-tvarka_2025-05-29_galutinis.pdf" target="_blank" rel="noopener">Studijų tvarka</a> (2025-06-02 redakcija).</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Kai chate kyla audra</h2><p>Pirmas ėjimas ir principas šešioms dažniausioms situacijoms.</p></div>
+    <div id="crisisList" class="sec"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Žinučių šablonai</h2></div>
+    <div id="chatTpl" class="sec"></div>
+  </div>
+</section>
+
+<!-- ============ POKALBIAI ============ -->
+<section class="view" id="pokalbiai" data-view hidden>
+  <div class="hero">
+    <div class="eyebrow">Tarpasmeninė komunikacija</div>
+    <h1>Klausyk, kad tave išgirstų</h1>
+    <p class="lead">Seniūnas ir atstovas yra tiltas tarp studentų ir Kolegijos, o ne tarnas ar pasiuntinys. Tiltą stato klausymasis ir aiškus prašymas.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Ryšys per pirmas dvi savaites</h2><p>Grupė pasitiki tuo, ką pažįsta. Keturi žingsniai naujam seniūnui ar atstovui.</p></div>
+    <div class="stairs flat">
+      <div class="stair"><div class="k">1</div><p><strong>Prisistatykite gyvai.</strong> Po pirmos paskaitos 5 minutės: kas esate, kaip jus pasiekti, kada atsakote.</p></div>
+      <div class="stair"><div class="k">2</div><p><strong>Išmokite vardus.</strong> Žinutėje kreipkitės vardu, ne „sveiki visi“.</p></div>
+      <div class="stair"><div class="k">3</div><p><strong>Paklauskite, ko tikisi.</strong> Trys anoniminės apklausos klausimai: kas svarbu, kas trukdo, kaip pranešti.</p></div>
+      <div class="stair"><div class="k">4</div><p><strong>Prisistatykite kitai pusei.</strong> Trumpas laiškas katedrai ar dekanatui. Atstovams pokalbis su komiteto pirmininku.</p></div>
+    </div>
+    <p class="small muted">Pirmakursiams per 10 minučių parodykite Moodle ir studijų valdymo sistemą. Tai sutaupys šimtą klausimų chate.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>F-P-P: sunkus pokalbis per 3 sakinius</h2><p>Faktas, poveikis, prašymas. Be etikečių, tik tai, ką galima pamatyti ar išmatuoti.</p></div>
+    <div class="card">
+      <div class="field"><label for="fppF">Faktas</label><input type="text" id="fppF" value="Paskutinius du susitikimus praleidai."></div>
+      <div class="field"><label for="fppP">Poveikis</label><input type="text" id="fppP" value="Kiti trys darė tavo dalį ir pradeda pykti."></div>
+      <div class="field"><label for="fppR">Prašymas</label><input type="text" id="fppR" value="Ar gali iki penktadienio atsiųsti savo skyrių?"></div>
+      <div id="fppWarn"></div>
+      <div class="env"><div class="env-b" id="fppOut"></div></div>
+      <div class="row"><button class="btn primary sm" id="fppCopy">Kopijuoti</button></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Frazės</h2><p>Paspauskite frazę, kad nukopijuotumėte.</p></div>
+    <div class="two">
+      <div class="card"><h3>Atveria pokalbį</h3><div class="phr" id="phrOpen"></div></div>
+      <div class="card"><h3>Uždaro pokalbį</h3><div class="phr bad" id="phrClose"></div></div>
+    </div>
+    <div class="card"><h3>Ribos be įžeidimo</h3><div class="phr" id="phrLimits"></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Kai grupė nesutaria</h2></div>
+    <div class="card"><ul class="ticks small">
+      <li><span><strong>Anonimiškai.</strong> Klausimą sprendžia apklausa, ne pakeltos rankos chate, kitaip kalba tik garsiausieji.</span></li>
+      <li><span><strong>Su terminu ir dauguma.</strong> „Balsuojam iki trečiadienio 18 val.; sprendžia daugiau nei pusė balsavusių.“</span></li>
+      <li><span><strong>Sprendimas su priežastimi.</strong> „Nusprendėm X, nes Y.“</span></li>
+      <li><span><strong>Mažumai atskirai.</strong> „Girdžiu, kad tau tai netinka. Ką galiu padaryti dėl tavęs?“</span></li>
+    </ul><p class="small muted">Akademinės etikos kodeksas prašo gerbti kitų nuomonę (31.1 str.).</p></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Kreipimosi laiptai</h2><p>Problemą sprendžiame nuo artimiausio žmogaus. Grasinimai ir žiniasklaida niekada nėra pirmas žingsnis.</p></div>
+    <div class="stairs">
+      <div class="stair"><div class="k">1</div><p><strong>Su pačiu žmogumi:</strong> grupioku ar dėstytoju, gyvai arba laišku.</p></div>
+      <div class="stair"><div class="k">2</div><p><strong>Katedra ar dekanatas:</strong> katedros vedėjas, studijų reikalai.</p></div>
+      <div class="stair"><div class="k">3</div><p><strong>Fakulteto vadovybė:</strong> prodekanas, dekanas.</p></div>
+      <div class="stair"><div class="k">4</div><p><strong>Sisteminė problema:</strong> studijų krypties komitetas, Studentų atstovybė, Akademinė taryba.</p></div>
+    </div>
+    <p class="small muted">Studentų atstovybė gali patarti bet kuriame žingsnyje. Dėl teisėtų interesų pažeidimo studentas gali kreiptis į Ginčų nagrinėjimo komisiją (Studijų tvarka, 110.9 p.), dėl etikos pažeidimų į Etikos komitetą (etika@go.kauko.lt). Viešai kritikuoti Kolegiją, neišnaudojus vidinių galimybių, Etikos kodeksas laiko pažeidimu (14.11 str.). Pareigybių pavadinimai fakultetuose gali skirtis.</p>
+  </div>
+</section>
+
+<!-- ============ POSĖDŽIAI ============ -->
+<section class="view" id="posedziai" data-view hidden>
+  <div class="hero">
+    <div class="eyebrow">Studentų atstovams savivaldoje</div>
+    <h1>Tavo balsas posėdyje</h1>
+    <p class="lead">Akademinėje taryboje 9 iš 38 narių yra studentų atstovai. Komitetuose ir taryboje studentų balsas veikia tik tada, kai jis paruoštas iš anksto ir grąžinamas studentams po posėdžio.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Atstovo ciklas</h2><p>Keturi žingsniai kiekvienam posėdžiui. Pažymėti punktai išsaugomi jūsų telefone.</p></div>
+    <div class="cycle" id="cycleNav" role="group" aria-label="Atstovo ciklas"></div>
+    <div class="card"><div class="check" id="cycleBody"></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>MANO, NES, SIŪLOM</h2><p>Pasisakymas posėdyje per 60 sekundžių: pozicija, įrodymas, pasiūlymas.</p></div>
+    <div class="card">
+      <span class="tag ex">Pavyzdys</span>
+      <div class="field"><label for="mnsA">Studentai mano, kad…</label><textarea id="mnsA" rows="2">trys atsiskaitymai tą pačią 2 kurso savaitę mažina darbų kokybę.</textarea></div>
+      <div class="field"><label for="mnsB">Nes… (skaičiai, pavyzdys)</label><textarea id="mnsB" rows="2">apklausoje 41 iš 63 studentų nurodė, kad 11-ą savaitę turėjo tris atsiskaitymus per keturias dienas; 28 iš jų atidavė bent vieną darbą pavėluotai.</textarea></div>
+      <div class="field"><label for="mnsC">Todėl siūlome…</label><textarea id="mnsC" rows="2">pavasario semestre bandomai suderinti šių trijų modulių atsiskaitymų kalendorių. Studentų atstovai padės surinkti grįžtamąjį ryšį po semestro.</textarea></div>
+      <div class="row" id="mnsTime"></div>
+      <div class="env"><div class="env-b" id="mnsOut"></div></div>
+      <div class="row"><button class="btn primary sm" id="mnsCopy">Kopijuoti pasisakymą</button></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Frazės posėdyje</h2><p>Paspauskite frazę, kad nukopijuotumėte.</p></div>
+    <div class="card"><div class="phr" id="phrMeet"></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Ką verta žinoti apie Akademinę tarybą</h2><p>Pagal Kauno kolegijos Akademinės tarybos darbo reglamentą (2025-01-28 red.). Komitetai turi savo nuostatus, pasitikrinkite juos.</p></div>
+    <div class="card tablewrap" style="padding:6px 12px">
+      <table class="facts">
+        <tr><td>Sudėtis <span class="pt">10 p.</span></td><td>38 nariai, iš jų 9 yra Studentų atstovybės skirti studentai.</td></tr>
+        <tr><td>Darbotvarkė <span class="pt">34 p.</span></td><td>Skelbiama vidinėje sistemoje ne vėliau kaip prieš 10 darbo dienų. Tai jūsų laikas surinkti studentų nuomonę.</td></tr>
+        <tr><td>Negalite dalyvauti <span class="pt">18.9, 19.4 p.</span></td><td>Nuomonę galima pateikti pirmininkui el. paštu ne vėliau kaip prieš 1 darbo dieną. Apie nedalyvavimą informuokite sekretorių.</td></tr>
+        <tr><td>Klausimas darbotvarkei <span class="pt">18.5 p.</span></td><td>Narys gali siūlyti įtraukti klausimą.</td></tr>
+        <tr><td>Nesutinkate <span class="pt">18.10 p.</span></td><td>Kiekvienas narys gali reikšti atskirąją nuomonę.</td></tr>
+        <tr><td>Kvorumas ir sprendimas <span class="pt">33, 48 p.</span></td><td>Posėdis teisėtas, kai dalyvauja ne mažiau kaip 2/3 narių. Nutarimui reikia daugiau nei pusės dalyvaujančių balsų.</td></tr>
+        <tr><td>Interesų konfliktas <span class="pt">19.6 p.</span></td><td>Informuoti ir nusišalinti nuo sprendimo.</td></tr>
+        <tr><td>Konfidencialumas <span class="pt">19.7 p.</span></td><td>Pirmajame posėdyje nariai pasirašo konfidencialumo deklaraciją. Abejojate, ar medžiaga vieša? Klauskite pirmininko ar sekretoriaus.</td></tr>
+        <tr><td>Lankomumas <span class="pt">22.1 p.</span></td><td>Be pateisinamos priežasties praleidus daugiau nei pusę posėdžių per metus, gali būti kreiptasi dėl nario atšaukimo.</td></tr>
+        <tr><td>Po posėdžio <span class="pt">43, 45 p.</span></td><td>Protokolas per 5 darbo dienas skelbiamas vidinėje sistemoje, nutarimai svetainėje.</td></tr>
+      </table>
+    </div>
+    <p class="src">Šaltinis: <a href="https://www.kaunokolegija.lt/kk_wp_content/uploads/2025/02/AT-reglamentas-2025-01-28-Nr.-AT-2.pdf" target="_blank" rel="noopener">KK Akademinės tarybos darbo reglamentas</a>. Prieš remdamiesi punktu, pasitikrinkite aktualią redakciją.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2>Atstovo šablonai</h2></div>
+    <div id="meetTpl" class="sec"></div>
+  </div>
+</section>
+
+</main>
+
+<nav class="tabbar" aria-label="Skiltys"><div class="in">
+  <button class="tab" data-go="mokymai"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg>Mokymai</button>
+  <button class="tab" data-go="laiskai"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>Laiškai</button>
+  <button class="tab" data-go="chatas"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>Chatas</button>
+  <button class="tab" data-go="pokalbiai"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M3 19c0-3 2.2-5 5-5s5 2 5 5"/><path d="M14 14.5c.8-.3 1.6-.5 2.5-.5 2.5 0 4.5 1.8 4.5 4.5"/></svg>Pokalbiai</button>
+  <button class="tab" data-go="posedziai"><svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="4" rx="1"/><path d="M6 14v6M18 14v6"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="6" r="2"/></svg>Posėdžiai</button>
+</div></nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sheet" id="sheet" hidden>
+  <strong>Pažymėkite tekstą ir nukopijuokite</strong>
+  <textarea id="sheetText" readonly></textarea>
+  <button class="btn" id="sheetClose">Uždaryti</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var store={get:function(k,d){try{var v=localStorage.getItem("kkir:"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem("kkir:"+k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- copy ---------- */
+var toastT;
+function toast(t){var el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show")},1600)}
+function copyText(text){
+  var done=false;
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){toast("Nukopijuota")},function(){fallback(text)});
+      done=true;
+    }
+  }catch(e){}
+  if(!done)fallback(text);
+}
+function fallback(text){var s=$("#sheet");$("#sheetText").value=text;s.hidden=false;var t=$("#sheetText");t.focus();t.select()}
+$("#sheetClose").addEventListener("click",function(){$("#sheet").hidden=true});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(!b)return;var el=document.getElementById(b.getAttribute("data-copy"));if(el)copyText(el.textContent)});
+
+/* ---------- views ---------- */
+var VIEWS=["mokymai","laiskai","chatas","pokalbiai","posedziai"];
+function show(id){
+  if(VIEWS.indexOf(id)<0)id="mokymai";
+  $$("[data-view]").forEach(function(v){v.hidden=v.id!==id});
+  $$(".tab").forEach(function(t){if(t.getAttribute("data-go")===id)t.setAttribute("aria-current","page");else t.removeAttribute("aria-current")});
+  try{history.replaceState(null,"","#"+id)}catch(e){}
+  window.scrollTo(0,0);
+}
+$$(".tab").forEach(function(t){t.addEventListener("click",function(){show(t.getAttribute("data-go"))})});
+var h=(location.hash||"").replace("#","");
+show(VIEWS.indexOf(h)>=0?h:"mokymai");
+
+/* ---------- Lithuanian helpers ---------- */
+var MON=["sausio","vasario","kovo","balandžio","gegužės","birželio","liepos","rugpjūčio","rugsėjo","spalio","lapkričio","gruodžio"];
+function ltDate(iso){if(!iso)return "";var p=iso.split("-");var m=parseInt(p[1],10),d=parseInt(p[2],10);if(!m||!d)return "";return MON[m-1]+" "+d+" d."}
+var VR=[["ius","iau"],["jus","jau"],["us","au"],["ys","y"],["is","i"],["as","ai"],["ė","e"]];
+function vocWord(w){
+  if(!w)return {w:w,rule:null};
+  var lw=w.toLocaleLowerCase("lt");
+  for(var i=0;i<VR.length;i++){var a=VR[i][0],b=VR[i][1];
+    if(lw.length>a.length+1&&lw.slice(-a.length)===a){var out=w.slice(0,w.length-a.length)+(w===w.toLocaleUpperCase("lt")?b.toLocaleUpperCase("lt"):b);return {w:out,rule:"-"+a+" → -"+b}}}
+  return {w:w,rule:null};
+}
+function vocPhrase(s){var parts=s.trim().split(/\s+/).filter(Boolean);var rules=[];var out=parts.map(function(p){var r=vocWord(p);if(r.rule)rules.push(r.rule);return r.w});return {text:out.join(" "),rules:rules,last:parts[parts.length-1]||""}}
+function isFem(word){var l=(word||"").toLocaleLowerCase("lt");return /(ė|a)$/.test(l)}
+function words(s){return (s.trim().match(/\S+/g)||[]).length}
+
+/* ---------- Laiško konstruktorius ---------- */
+var LB_EX={lbPrefix:"MKT-25 grupė",lbDate:"2026-10-27",lbTema:"prašymas perkelti kontrolinį į lapkričio 4 d.",lbSurname:"Rasa",
+  lbMain:"Grupės vardu prašytume perkelti spalio 30 d. Rinkodaros pagrindų kontrolinį darbą, nes tą pačią dieną 9:00 vyksta Statistikos egzaminas.",
+  lbFacts:"Tai liečia visus 24 grupės studentus.",lbOffer:"Grupei tiktų lapkričio 4 arba 6 d. Jūsų paskaitos metu. Jei šios datos netinka, prisitaikysime prie Jūsų pasiūlymo.",
+  lbName:"Tomas Kazlauskas",lbRole:"MKT-25 grupės seniūnas"};
+var LB_IDS=Object.keys(LB_EX);
+var LB_LET=[["T","tema"],["I","kas"],["K","kreip."],["S","esmė"],["L","trumpai"],["A","terminas"],["S","parašas"]];
+$("#lbTiles").innerHTML=LB_LET.map(function(l){return '<div class="tile">'+l[0]+'<small>'+l[1]+'</small></div>'}).join("");
+var lbSaved=store.get("lb",null);
+function lbFill(vals){LB_IDS.forEach(function(id){$("#"+id).value=vals[id]||""})}
+lbFill(lbSaved||LB_EX);
+function lbVal(id){return $("#"+id).value.trim()}
+function lbBuild(){
+  var v={};LB_IDS.forEach(function(id){v[id]=lbVal(id)});
+  var save={};LB_IDS.forEach(function(id){save[id]=$("#"+id).value});store.set("lb",save);
+  var voc=v.lbSurname?vocPhrase(v.lbSurname):null;
+  $("#lbVocHint").textContent=voc?("Kreipinyje: "+voc.text+(voc.rules.length?" ("+voc.rules.join(", ")+")":"")):"Kolegijoje kreipiamės vardu, be mokslo laipsnių. Nežinote gavėjo? Palikite tuščią.";
+  var greet=v.lbSurname?("Laba diena, "+voc.text+","):"Laba diena,";
+  var subj=(v.lbPrefix?v.lbPrefix+": ":"")+(v.lbTema||"[ko prašote]");
+  var fem=isFem((v.lbRole||"").split(/\s+/).pop());
+  var lines=[greet,""];
+  var intro="esu "+(v.lbRole||"[pareigos]")+" "+(v.lbName||"[vardas pavardė]")+".";
+  lines.push(intro+(v.lbMain?" "+v.lbMain:""));
+  if(v.lbFacts)lines.push(v.lbFacts);
+  if(v.lbOffer)lines.push(v.lbOffer);
+  if(v.lbDate)lines.push("Būčiau "+(fem?"dėkinga":"dėkingas")+" už atsakymą iki "+ltDate(v.lbDate)+", kad spėčiau informuoti grupę.");
+  lines.push("","Pagarbiai",v.lbName||"[Vardas Pavardė]",v.lbRole||"[pareigos]","Kauno kolegija");
+  var body=lines.join("\n");
+  $("#lbOutSubj").textContent=subj;$("#lbOutBody").textContent=body;
+  var wc=words(body);var c=$("#lbCount");c.textContent=wc+" žod.";c.classList.toggle("over",wc>150);
+  var ok=[!!(v.lbPrefix&&v.lbTema),!!(v.lbName&&v.lbRole),true,!!v.lbMain,wc<=150,!!v.lbDate,!!v.lbName];
+  $$("#lbTiles .tile").forEach(function(t,i){t.classList.toggle("on",ok[i]);t.classList.toggle("miss",!ok[i])});
+}
+LB_IDS.forEach(function(id){$("#"+id).addEventListener("input",lbBuild);$("#"+id).addEventListener("change",lbBuild)});
+$("#lbClear").addEventListener("click",function(){lbFill({});lbBuild()});
+$("#lbReset").addEventListener("click",function(){lbFill(LB_EX);lbBuild()});
+$("#lbCopySubj").addEventListener("click",function(){copyText($("#lbOutSubj").textContent)});
+$("#lbCopyBody").addEventListener("click",function(){copyText($("#lbOutBody").textContent)});
+lbBuild();
+
+/* ---------- Parašas ---------- */
+var SG_LOGO={kk:"https://kaunokolegija.lt/wp-content/uploads/2025/10/cropped-1600x960_LT.png",uni:"https://kaunokolegija.lt/wp-content/uploads/2026/02/UNINOVIS-LOGO-primary-PNG-no-bcg-1-scaled.png"};
+var SG_PREV={kk:"data:image/png;base64,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",uni:"data:image/png;base64,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"};
+var SG_EX={sgName:"Tomas Kazlauskas",sgGroup:"MKT-25",sgRole:"Grupės seniūnas",sgPhone:"",sgMail:"tomas.kazlauskas@go.kauko.lt"};
+var SG_IDS=Object.keys(SG_EX);var sgSaved=store.get("sg2",null);
+SG_IDS.forEach(function(id){$("#"+id).value=(sgSaved||SG_EX)[id]||""});
+function sgVals(){var v={};SG_IDS.forEach(function(id){v[id]=$("#"+id).value.trim()});return v}
+function sgGroupLine(g){if(!g)return "[grupė] grupė";return /grup/i.test(g)?g:g+" grupė"}
+function sgPhone(p){
+  var d=(p||"").replace(/\D/g,"");
+  if(/^370\d{8}$/.test(d))d=d.slice(3);else if(/^8\d{8}$/.test(d))d=d.slice(1);else if(!/^\d{8}$/.test(d))return p;
+  return "+ 370 "+d.slice(0,3)+" "+d.slice(3,5)+" "+d.slice(5);
+}
+function sgHtml(v,prev){
+  var L=prev?SG_PREV:SG_LOGO,c="#666666",f="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:"+c;
+  var g="color:"+c+";text-decoration:underline",bl="color:#1155CC;text-decoration:underline";
+  return '<div style="'+f+'">Pagarbiai | Best regards,<br><br>'+
+    '<b>'+esc(v.sgName||"[Vardas Pavardė]")+'</b><br>Studentas | Student<br>'+esc(sgGroupLine(v.sgGroup))+'<br>'+
+    (v.sgRole?esc(v.sgRole)+'<br>':'')+'<br>'+
+    '<img src="'+L.kk+'" alt="Kauno kolegija" width="70" height="46" style="vertical-align:middle;margin-right:3px">'+
+    '<img src="'+L.uni+'" alt="UNINOVIS" width="116" height="32" style="vertical-align:middle;border-left:1px solid #E5E5E5;padding-left:5px"><br><br>'+
+    (v.sgPhone?esc(sgPhone(v.sgPhone))+'<br>':'')+
+    '<a href="mailto:'+esc(v.sgMail)+'" style="'+g+'">'+esc(v.sgMail||"vardas.pavarde@go.kauko.lt")+'</a><br>'+
+    '<a href="https://www.kaunokolegija.lt" style="'+bl+'">www.kaunokolegija.lt</a><br>'+
+    '<a href="https://www.kaunokolegija.lt/en/" style="'+bl+'">www.kaunokolegija.lt/en/</a></div>';
+}
+function sgText(v){
+  var l=["Pagarbiai | Best regards,","",v.sgName||"[Vardas Pavardė]","Studentas | Student",sgGroupLine(v.sgGroup)];
+  if(v.sgRole)l.push(v.sgRole);l.push("");
+  if(v.sgPhone)l.push(sgPhone(v.sgPhone));
+  l.push(v.sgMail||"vardas.pavarde@go.kauko.lt","www.kaunokolegija.lt","www.kaunokolegija.lt/en/");
+  return l.join("\n");
+}
+function sgBuild(){var v=sgVals();store.set("sg2",v);$("#sgOut").innerHTML=sgHtml(v,true)}
+SG_IDS.forEach(function(id){$("#"+id).addEventListener("input",sgBuild)});sgBuild();
+function sgCopyRich(){
+  var v=sgVals(),html=sgHtml(v,false),txt=sgText(v);
+  function legacy(){
+    var d=document.createElement("div");d.contentEditable="true";d.innerHTML=html;
+    d.style.cssText="position:fixed;left:-9999px;top:0;opacity:0";document.body.appendChild(d);
+    var r=document.createRange();r.selectNodeContents(d);var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+    var ok=false;try{ok=document.execCommand("copy")}catch(e){}
+    s.removeAllRanges();d.remove();
+    if(ok)toast("Nukopijuota su logotipais");else copyText(txt);
+  }
+  try{
+    if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){
+      navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([txt],{type:"text/plain"})})])
+        .then(function(){toast("Nukopijuota su logotipais")},legacy);
+      return;
+    }
+  }catch(e){}
+  legacy();
+}
+$("#sgCopy").addEventListener("click",sgCopyRich);
+$("#sgCopyTxt").addEventListener("click",function(){copyText(sgText(sgVals()))});
+$$("[data-copy-url]").forEach(function(b){b.addEventListener("click",function(){copyText(SG_LOGO[b.getAttribute("data-copy-url")])})});
+
+/* ---------- Šauksmininkas ---------- */
+function vocRender(){
+  var raw=$("#vocIn").value.trim();var out=$("#vocOut");
+  if(!raw){out.innerHTML='<p class="small muted">Įrašykite vardą ar pavardę.</p>';return}
+  var p=vocPhrase(raw),parts=raw.split(/\s+/);
+  var fem=isFem(p.last);var sur=parts.length>1?vocWord(parts[parts.length-1]).w:p.text;var first=parts.length>1?vocWord(parts[0]).w:null;
+  var opts=[];
+  if(first)opts.push(["Laba diena, "+first+",","KK įprasta"]);
+  opts.push(["Laba diena, "+sur+",",first?"oficialiam raštui":"kopijuoti"]);
+  out.innerHTML=opts.map(function(o){return '<button type="button" data-v="'+esc(o[0])+'"><span>'+esc(o[0])+'</span><span class="c">'+esc(o[1])+'</span></button>'}).join("")+
+    (p.rules.length?'<p class="small muted">Pritaikyta: '+esc(p.rules.join(", "))+'</p>':'<p class="small muted">Galūnė nepakeista, patikrinkite formą.</p>');
+}
+$("#vocOut").addEventListener("click",function(e){var b=e.target.closest("button[data-v]");if(b)copyText(b.getAttribute("data-v"))});
+$("#vocIn").addEventListener("input",vocRender);vocRender();
+
+/* ---------- templates ---------- */
+function renderTpl(el,list,prefix){
+  el.innerHTML=list.map(function(t,i){var id=prefix+i;return '<details class="card tpl"'+(i===0?" open":"")+'><summary><span>'+esc(t.t)+'<br><span class="when">'+esc(t.w)+'</span></span></summary><pre id="'+id+'">'+esc(t.x)+'</pre><div class="row"><button class="btn primary sm" data-copy="'+id+'">Kopijuoti</button></div></details>'}).join("");
+}
+var MAIL=[
+{t:"Prašymas dėstytojui",w:"Perkelti atsiskaitymą, konsultacija, paaiškinimas",x:"Tema: [Grupė]: prašymas [ko prašote] ([data])\n\nLaba diena, [vardas šauksmininku],\n\nesu [grupės] seniūnas(-ė) [Vardas Pavardė]. Grupės vardu prašytume [ko prašote], nes [priežastis].\nTai liečia [kiek] grupės studentų.\nGrupei tiktų [1–2 variantai]. Jei netinka, prisitaikysime prie Jūsų pasiūlymo.\nBūčiau dėkingas(-a) už atsakymą iki [data], kad spėčiau informuoti grupę.\n\nPagarbiai\n[Vardas Pavardė]\n[Grupės] seniūnas(-ė), [fakultetas]\nKauno kolegija"},
+{t:"Veiksmų laiškas grupei",w:"Kai grupė turi ką nors padaryti iki termino",x:"Tema: [VEIKSMAS iki MM-DD] [ką padaryti]\n\nLabas visiems,\n\n[kiek] dalykai, kuriuos reikia padaryti:\n1. [Ką] iki [data, valanda]. Nuoroda: [nuoroda]\n2. [Ką] iki [data]. Nuoroda: [nuoroda]\n\nŽinia be veiksmo: [informacija].\nKo dar nežinau: [klausimas]. Parašysiu iki [kada].\n\n[Vardas]\n[Grupė] grupės seniūnas(-ė)"},
+{t:"Priminimas, kai neatsakė",w:"Po 2–3 darbo dienų, toje pačioje laiškų gijoje",x:"Tema: RE: [originali tema]\n\nLaba diena, [vardas šauksmininku],\n\nmandagiai primenu [data] siųstą laišką dėl [ko]. Grupė laukia sprendimo, nes [kodėl svarbus laikas].\nJei patogiau, galėčiau užeiti per konsultaciją [kada].\n\nPagarbiai\n[Vardas Pavardė]\n[pareigos]"},
+{t:"Pranešimas apie problemą",w:"Tvarkaraštis, auditorija, sistema, aplinka",x:"Tema: [Grupė]: [problema vienu sakiniu]\n\nLaba diena,\n\nesu [grupės] seniūnas(-ė) [Vardas Pavardė]. Pranešu apie problemą: [kas, kada, kur].\nNuo kada ir ką liečia: [nuo kada, kiek studentų].\nKą jau bandėme: [veiksmai].\nSiūlome: [konkretus sprendimas].\n\nPagarbiai\n[Vardas Pavardė]\n[pareigos]"},
+{t:"Prisistatymas katedrai ar dekanatui",w:"Pirmą savaitę po išrinkimo",x:"Tema: [Grupė]: naujasis grupės seniūnas(-ė) ir kontaktai\n\nLaba diena, [vardas šauksmininku],\n\nesu [Vardas Pavardė], šiais mokslo metais išrinktas(-a) [grupės] seniūnu(-e). Grupės klausimus Jums perduosiu el. paštu, kai grupė bus sutarusi.\nMano kontaktai: [el. paštas], [telefonas].\nAr yra dalykų, apie kuriuos seniūnas turėtų žinoti iš anksto? Pavyzdžiui, svarbūs terminai ar patogiausias būdas su Jumis susisiekti.\n\nPagarbiai\n[Vardas Pavardė]\n[Grupė] grupės seniūnas(-ė)"}
+];
+renderTpl($("#mailTpl"),MAIL,"mt");
+
+var CHATT=[
+{t:"Svarbi žinutė „info“ kanale",w:"Viena žinutė, vienas veiksmas",x:"[SVARBU] [Ką padaryti]\nIki: [data, valanda]\nKur: [nuoroda arba vieta]\nKlausimus rašykite man asmeniškai."},
+{t:"Kai sklinda gandas",w:"Patikrink šaltinį, pasakyk, kada bus atsakymas",x:"Oficialios informacijos kol kas nėra, [tvarkaraštis ar Moodle] rodo, kad [kaip yra]. Parašiau [kam] ir pranešiu čia ne vėliau kaip [kada]. Iki tol planuojam, kad [kaip įprasta]."},
+{t:"Kai prasideda ginčas",w:"Perkelk iš chato į pokalbį",x:"[Vardas], [vardas], matau, kad abiem svarbu [bendras tikslas]. Pasikalbėkim [kada, kur] ir susitarkim. Čia toliau nesiginčijam."},
+{t:"Kai kas nors įkėlė asmens duomenų",w:"Greitai, ramiai, be gėdinimo",x:"[Vardas], ištrink, prašau, dabar pat. [Pažymiai, kontaktai, nuotraukos] yra asmens duomenys, jų čia be sutikimo nekeliam. Kas spėjo išsisaugoti, ištrinkit irgi."}
+];
+renderTpl($("#chatTpl"),CHATT,"ct");
+
+var MEETT=[
+{t:"Nuomonė raštu, kai negalite dalyvauti",w:"AT: pirmininkui el. paštu ne vėliau kaip prieš 1 darbo dieną",x:"Tema: [Organas] [data] posėdis: studentų atstovų nuomonė dėl [N] klausimo\n\nLaba diena, [vardas šauksmininku],\n\nesu [organo] narys(-ė), studentų atstovas(-ė) [Vardas Pavardė]. [Data] posėdyje dalyvauti negalėsiu, todėl nuomonę dėl [N] darbotvarkės klausimo „[pavadinimas]“ teikiu raštu.\n\nStudentai mano, kad [pozicija].\nNes [faktai: apklausa, skaičiai, pavyzdys].\nTodėl siūlome [konkretus pasiūlymas].\n\nPrašau šią nuomonę pristatyti svarstant [N] klausimą. Kopiją siunčiu sekretoriui.\n\nPagarbiai\n[Vardas Pavardė]\n[Organas], studentų atstovas(-ė)"},
+{t:"Žinutė studentams po posėdžio",w:"Per 2 dienas, kad nuomonė nedingtų tyloje",x:"[Organas], [data], trumpai\nNuspręsta: [1–3 punktai]\nKą tai reiškia jums: [pasekmė, nuo kada]\nDar nežinome: [kas lieka atvira, kada paaiškės]\nDaugiau: [kur paskelbta]. Klausimus rašykite man."},
+{t:"48 valandų apklausa studentams",w:"Prieš posėdį, ne daugiau kaip 3 klausimai",x:"[Organas] [data] svarstys: [klausimas paprastais žodžiais].\nPadėkite paruošti studentų poziciją. Užtruks 2 minutes, atsakykite iki [data, valanda]:\n1. Ar jums tai aktualu? (taip, ne, nežinau)\n2. Kas jums svarbiausia šiame klausime? (laisvas atsakymas)\n3. Ką siūlytumėte? (laisvas atsakymas)\nApklausa anoniminė: [nuoroda]. Rezultatus paskelbsiu po posėdžio."},
+{t:"Siūlymas įtraukti klausimą",w:"Kai problema sisteminė ir kartojasi",x:"Tema: Siūlymas įtraukti klausimą į [organo] darbotvarkę: [klausimas]\n\nLaba diena, [vardas šauksmininku],\n\nesu [organo] narys(-ė), studentų atstovas(-ė) [Vardas Pavardė]. Siūlau į artimiausio posėdžio darbotvarkę įtraukti klausimą „[pavadinimas]“.\nKodėl dabar: [faktai, kiek studentų liečia, nuo kada].\nSiūlomas sprendimas: [projektas vienu sakiniu].\nGaliu parengti trumpą medžiagą iki [data].\n\nPagarbiai\n[Vardas Pavardė]\n[Organas], studentų atstovas(-ė)"}
+];
+renderTpl($("#meetTpl"),MEETT,"mmt");
+
+/* ---------- Crisis list ---------- */
+var CRISIS=[
+["Gandas","„Ar tiesa, kad rytoj paskaitos nebus?“","Patikrink tvarkaraštį ir Moodle, parašyk dėstytojui, pasakyk grupei, kada bus atsakymas.","Seniūnas neplatina gandų, jis tikrina šaltinį."],
+["Memas su dėstytoju","Paskaitoje padaryta nuotrauka su užrašu, 14 juoko reakcijų.","Paprašyk ištrinti, autoriui parašyk asmeniškai, be gėdinimo.","Žmonės nuotraukose tik su jų sutikimu. Fotografuoti paskaitoje be dėstytojo sutikimo yra Etikos kodekso pažeidimas (30.15 str.)."],
+["Konfliktas","Du grupiokai kaltina vienas kitą dėl grupinio darbo.","Pripažink abiejų tikslą ir perkelk pokalbį į gyvą susitikimą.","Konfliktą sprendžiame ne bendrame chate ir nestojame į kurią nors pusę."],
+["Asmens duomenys","Įkelta visos grupės pažymių ekrano nuotrauka.","Paprašyk ištrinti dabar pat, asmeniškai parašyk paveiktiems.","Pažymiai, kontaktai ir sveikatos informacija yra asmens duomenys. Įvertinimai skelbiami konfidencialiai (Studijų tvarka, 66 p.)."],
+["Vidurnaktis","23:40 sužinai, kad rytojaus 8:00 paskaita perkelta.","Trumpa žinutė su @visi „info“ kanale, prisegta, ir priminimas 7:00.","@visi naktį tik tada, kai informacija reikalinga iki ryto."],
+["Projekto nuotėkis","Kažkas įkėlė posėdžio projekto ekrano nuotrauką, kyla panika.","Paaiškink, kad tai projektas, pasakyk, kada ir kur bus svarstoma, pakviesk į apklausą.","Projektas nėra sprendimas. Atstovas ramina faktais ir renka nuomonę."]
+];
+$("#crisisList").innerHTML=CRISIS.map(function(c){return '<div class="card"><div class="row" style="justify-content:space-between"><h3>'+esc(c[0])+'</h3></div><div class="chat" style="padding:10px"><div class="msg"><div class="b">'+esc(c[1])+'</div></div><div class="msg me"><div class="who">Pirmas ėjimas</div><div class="b">'+esc(c[2])+'</div></div></div><p class="small"><strong>Principas.</strong> '+esc(c[3])+'</p></div>'}).join("");
+
+/* ---------- phrases ---------- */
+function phr(el,list,note,inert){el.innerHTML=list.map(function(p){return inert?'<button type="button" disabled><span>'+esc(p)+'</span></button>':'<button type="button" data-v="'+esc(p)+'"><span>'+esc(p)+'</span><span class="c">'+(note||"kopijuoti")+'</span></button>'}).join("")}
+phr($("#phrOpen"),["Papasakok daugiau.","Kas tau čia sunkiausia?","Jei teisingai supratau, tau svarbu… Taip?","Ką galėtume padaryti, kad…?","Ko tau reikėtų iš manęs?"]);
+phr($("#phrClose"),["„Tu visada…“","„Visi taip daro.“","„Nesureikšmink.“","„Tai ne mano problema.“","„Bet…“ iškart po pagyrimo"],null,true);
+phr($("#phrLimits"),["Grupės klausimus atsakau darbo dienomis iki 20 val.","Tai geriausiai išspręs [kas], štai jo el. paštas.","Pažiūrėkim kartu, kur Moodle tai rasti, kitą kartą jau žinosi.","Tai ne mano sprendimas, bet galiu perduoti jūsų nuomonę iki [kada]."]);
+phr($("#phrMeet"),["Prašau paaiškinti, ką šis punktas reiškia studentams.","Ar galėtume įrašyti studentų atstovų poziciją į protokolą?","Siūlau grįžti prie šio klausimo, kai iki [data] surinksime studentų nuomonę.","Studentų atstovai šiuo klausimu reiškia atskirąją nuomonę.","Kada ir kaip studentai bus informuoti apie šį sprendimą?"]);
+document.addEventListener("click",function(e){var b=e.target.closest(".phr button[data-v]");if(b&&!b.closest("#vocOut"))copyText(b.getAttribute("data-v"))});
+
+/* ---------- F-P-P ---------- */
+var LABELS=["visada","niekada","tingi","tingus","tinginys","tinginė","nieko nedarai","kaip visada","neatsakingas","neatsakinga","nesąžining","egoist","durn"];
+function fpp(){
+  var f=$("#fppF").value.trim(),p=$("#fppP").value.trim(),r=$("#fppR").value.trim();
+  $("#fppOut").textContent=[f,p,r].filter(Boolean).join(" ");
+  var all=(f+" "+p+" "+r).toLocaleLowerCase("lt");var hit=LABELS.filter(function(w){return all.indexOf(w)>=0});
+  $("#fppWarn").innerHTML=hit.length?'<div class="alert"><b>Etiketė, ne faktas:</b> „'+esc(hit[0])+'“. Pakeiskite tuo, ką galima pamatyti: kas, kada, kiek kartų.</div>':(f&&p&&r?'<span class="pill good">Yra faktas, poveikis ir prašymas</span>':'');
+}
+["fppF","fppP","fppR"].forEach(function(id){$("#"+id).addEventListener("input",fpp)});fpp();
+$("#fppCopy").addEventListener("click",function(){copyText($("#fppOut").textContent)});
+
+/* ---------- MANO-NES-SIŪLOM ---------- */
+function mns(){
+  var a=$("#mnsA").value.trim(),b=$("#mnsB").value.trim(),c=$("#mnsC").value.trim();
+  var t=["Studentai mano, kad "+(a||"…"),"Nes "+(b||"…"),"Todėl siūlome "+(c||"…")].join("\n");
+  $("#mnsOut").textContent=t;
+  var sec=Math.round(words(t)/130*60);
+  var cls=sec<=60?"good":(sec<=75?"warn":"bad");
+  $("#mnsTime").innerHTML='<span class="pill '+cls+'">≈ '+sec+' s kalbant</span><span class="small muted">'+(sec<=60?"Telpa į minutę.":"Sutrumpinkite iki 60 s.")+'</span>';
+}
+["mnsA","mnsB","mnsC"].forEach(function(id){$("#"+id).addEventListener("input",mns)});mns();
+$("#mnsCopy").addEventListener("click",function(){copyText($("#mnsOut").textContent)});
+
+/* ---------- Atstovo ciklas ---------- */
+var CYCLE=[
+["Surink","prieš 10 d.",["Perskaičiau darbotvarkę ir projektus","Pažymėjau klausimus, kurie liečia studentus","Paklausiau studentų: 3 klausimai, 48 valandos","Pasitariau su kitais studentų atstovais ir Studentų atstovybe"]],
+["Paruošk","prieš 1–3 d.",["Kiekvienam klausimui MANO, NES, SIŪLOM","Turiu skaičių: kiek apklausta, kiek pritaria","Žinau, ko konkrečiai prašysiu nuspręsti","Negaliu dalyvauti? Nuomonę raštu pirmininkui (AT atveju ne vėliau kaip prieš 1 darbo dieną) ir informuoju sekretorių"]],
+["Pasakyk","posėdyje",["Kalbu ne ilgiau nei 60 sekundžių","Klausiu, jei nesuprantu termino ar pasekmių","Prašau įrašyti studentų poziciją į protokolą","Nesutinku? Reiškiu atskirąją nuomonę"]],
+["Grąžink","per 2 d.",["Žinutė studentams: kas nuspręsta, ką tai reiškia, ko dar nežinome, kur rasti","Nedalinu projektų ir konfidencialios medžiagos","Atsakau tiems, kurie dalyvavo apklausoje"]]
+];
+var cyc=store.get("cyc",{});var cycI=store.get("cycI",0);
+function cycleRender(){
+  $("#cycleNav").innerHTML=CYCLE.map(function(c,i){var done=c[2].filter(function(_,j){return cyc[i+"_"+j]}).length;return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===cycI)+'"><b>'+c[0]+'</b><span>'+c[1]+', '+done+'/'+c[2].length+'</span></button>'}).join("");
+  var c=CYCLE[cycI];
+  $("#cycleBody").innerHTML=c[2].map(function(t,j){var k=cycI+"_"+j;return '<label><input type="checkbox" id="cy'+k+'" data-k="'+k+'"'+(cyc[k]?" checked":"")+'><span>'+esc(t)+'</span></label>'}).join("");
+}
+$("#cycleNav").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;cycI=+b.getAttribute("data-i");store.set("cycI",cycI);cycleRender()});
+$("#cycleBody").addEventListener("change",function(e){var k=e.target.getAttribute("data-k");if(!k)return;cyc[k]=e.target.checked;store.set("cyc",cyc);cycleRender()});
+cycleRender();
+
+/* ================= MOKYMAI ================= */
+var team=$("#team");team.value=store.get("team","");team.addEventListener("input",function(){store.set("team",team.value)});
+
+var CASES=[
+{t:"Prašymas dėstytojui",h:[["Nuo","tomuxas.2005@gmail.com"],["Kam","dėstytojui"],["Tema","(be temos)"]],b:"labas, ar galima perkelt kolį? nes daug kam netinka nes tą dieną dar kitas egzas. parašykit kada galima. ačiū iš anksto",task:"Perrašykite kaip MKT-25 grupės seniūnas: grupė prašo perkelti spalio 30 d. kontrolinį."},
+{t:"Laiškas administracijai",h:[["Kam","fakulteto administracijai"],["Tema","TVARKARAŠTIS!!!"]],b:"Sveiki, nu jau kiek galima. Trečią savaitę iš eilės ketvirtadienį turim dvi paskaitas tuo pačiu metu ir niekas nieko nedaro, visi pikti, žmonės nebežino kur eiti. Dar ir auditorija per maža, sėdim ant palangių. Atrodo, kad niekam nerūpi studentai. Prašau sutvarkyti. Gintarė",task:"Perrašykite kaip TV-24 grupės seniūnė. Kam šį laišką siųstumėte pirmiausia?"},
+{t:"Informacija grupei",h:[["Kam","visai grupei"],["Tema","info"]],b:"Labas visiems!! Šiandien buvau susitikime su prodekane ir kalbėjom apie daug ką, buvo ir apie praktikas, ir apie studentų apklausą, kuri dabar vyksta, ir kad reikia būtinai užpildyti, nes nuo to daug kas priklauso, dar buvo apie pasirenkamuosius dalykus, kuriuos reikia pasirinkti sistemoje iki kito penktadienio, nes paskui nebebus galima ir priskirs automatiškai, ir dar vienas dalykas, kitą trečiadienį paskaitos nebus, bet nežinau, ar tikrai. Jei kas, klausimų rašykit. Ačiū!!",task:"Perrašykite taip, kad grupė per 30 sekundžių žinotų, ką ir iki kada padaryti."},
+{t:"Nepasitenkinimas vertinimu",h:[["Kam","dėstytojai"],["Kopija","dekanui, direktoriui"],["Tema","SKUNDAS"]],b:"KIEK GALIMA?!?! Jūs vėl įvertinote mūsų darbus be jokių paaiškinimų, pusė grupės gavo 5, nors visi darėm pagal reikalavimus. Akivaizdu, kad jums nepatinka mūsų grupė. Jeigu ir toliau taip bus, eisim aukščiau ir rašysim į žiniasklaidą. Grupė",task:"Parašykite pirmą žingsnį: laišką tik dėstytojai. Ko konkrečiai prašote?"},
+{t:"Atstovams: nuomonė prieš posėdį",h:[["Kam","Akademinės tarybos pirmininkui"],["Tema","posėdis"]],b:"Laba, negalėsiu ateit į šiandienos posėdį, nes turiu egzą. Bet žinokit, kad studentams tas naujas lankomumo projektas labai nepatinka, visi pyksta. Gal galit kaip nors atsižvelgt. Ačiū, Ugnė",meta:"Išsiųsta lapkričio 12 d., 9:40. Posėdis tą pačią dieną 10:00.",task:"Perrašykite kaip AT narė, studentų atstovė, naudodami MANO, NES, SIŪLOM. Kada šį laišką reikėjo išsiųsti?"}
+];
+var CHATS=[
+{t:"Gandas",time:"21:47",title:"MKT-25 pokalbiai",m:[["Ieva","ar tiesa kad rytoj statistikos nebus??"],["Tomas","girdėjau kad dėstytojas serga"],["Karolis","tai neinam, jėga"],["Gabija","kas taip sakė? aš iš Jonavos važiuoju 40 min..."],["Tomas","kažkas iš trečio kurso rašė"],["Mantas","@seniūnas ????"]]},
+{t:"Memas",time:"13:12",title:"TV-24 pokalbiai",m:[["Lukas","[nuotrauka: per paskaitą nufotografuotas dėstytojas su užrašu „kai supranti, kad nieko neparuošei“]",1],["Rūta","hahaha geras"],["Paulius","tik kad jis nepamatytų"]]},
+{t:"Konfliktas",time:"16:30",title:"Projekto komanda + seniūnas",m:[["Eglė","na žinoma, vėl viską padarysiu aš, kaip visada"],["Darius","tu pati nieko neleidi daryti, viską perimi ir dar kaltini"],["Eglė","nes tu nieko nedarai laiku!!!"],["Darius","o tu pati tobula, aišku"],["Jonas","[spragėsių reakcija]",1]]},
+{t:"Asmens duomenys",time:"19:05",title:"MKT-25 pokalbiai",m:[["Simas","[ekrano nuotrauka: visos grupės kontrolinio rezultatai: vardai, pavardės, balai]",1],["Simas","žiūrėkit kas gavo 4"],["Agnė","kodėl čia mano pažymys??"]]},
+{t:"Vidurnaktis",time:"23:40",title:"Jūs ką tik gavote laišką",m:[["Laiškas","Rytojaus 8:00 paskaita perkelta iš 202 į 315 auditoriją."],["Rokas","@visi kas nori pigių koncerto bilietų šeštadieniui? rašykit"]]},
+{t:"Projekto nuotėkis",time:"20:15",title:"Studentų atstovų chatas, 180 narių",m:[["Rokas","[ekrano nuotrauka: „PROJEKTAS. Studijų tvarkos pakeitimai: privalomas 80 % lankomumas visiems dalykams“]",1],["Rokas","nuo kitų metų privalomas lankomumas!!!"],["Ema","KĄ??? aš dirbu, kaip tada"],["Jonas","reikia rašyt peticiją, kas su manim"],["Ema","@atstovai jūs apie tai žinojot???"]]}
+];
+var ROLES=[
+{t:"Nedalyvaujantis komandos narys",a:"Trys grupiokai paprašė tavęs „kažką padaryti“ su Justu, kuris nedalyvauja grupiniame projekte. Terminas po savaitės. Tavo tikslas: išsiaiškinti situaciją ir susitarti dėl konkretaus kito žingsnio.",bn:"Justas",b:"Nuo rugsėjo dirbi naktinėmis pamainomis ir nespėji į dieninius susitikimus. Gėdijiesi, todėl iš pradžių atsakinėji trumpai ir gynybiškai: „viskas ok“, „padarysiu“. Tikrąją priežastį atskleisk tik tada, kai seniūnas užduoda atvirą klausimą (ne „kodėl tu nieko nedarai?“) arba parodo, kad supranta. Atsivėręs esi pasiruošęs prisiimti dalį, kurią galima daryti nuotoliu ir vakarais."},
+{t:"Vienas prieš visus",a:"Grupė balsavimu (19 iš 25) nusprendė prašyti dėstytojo perkelti egzaminą į šeštadienį. Rūta parašė tau asmeniškai, kad tai „neteisinga“. Tavo tikslas: išklausyti, paaiškinti sprendimą ir rasti, ką galima padaryti.",bn:"Rūta",b:"Šeštadieniais dirbi ir negali to pakeisti, nes darbdavys jau sudarė grafiką. Iš pradžių kalbi piktai: „jums visiems nusispjaut“. Nusiramink, jei seniūnas perfrazuoja tavo jausmus (pvz., „girdžiu, kad jauti, jog tavo situacija nesvarbi“). Tavo tikrasis poreikis yra galimybė laikyti egzaminą kitu laiku, o ne atšaukti grupės sprendimą."},
+{t:"Seniūnas paštininkas",a:"Paulius tau rašo kasdien, dažnai po 22 val.: „paklausk dėstytojo…“, „kada bus…“. Atsakymai dažniausiai yra Moodle. Tavo tikslas: nustatyti ribas taip, kad santykis nenukentėtų.",bn:"Paulius",b:"Esi pirmakursis iš kito miesto ir nemoki naudotis Moodle bei Kolegijos sistemomis, bet gėdijiesi tai pripažinti. Jei seniūnas pasako „ieškok pats“, įsižeidi ir užsidarai. Atsiveri, jei seniūnas paklausia, kas sunkiausia, arba pasiūlo parodyti."},
+{t:"Nepatenkinti dėstytoju",a:"Penki grupiokai sako: „Tas dėstytojas baisus, parašyk skundą dekanui.“ Kalbi su Karoliu, kuris reikalauja garsiausiai. Tavo tikslas: surinkti konkrečius faktus ir susitarti dėl tinkamo pirmo žingsnio.",bn:"Karolis",b:"Esi supykęs, nes negavai įskaitos, ir nori, kad seniūnas „sutvarkytų“. Kalbi bendrybėmis: „jis visada“, „visiems blogai“. Tikrasis faktas: dėstytojas pirmajame užsiėmime nepristatė vertinimo kriterijų, jų nėra ir Moodle, todėl niekas nežino, kaip bus vertinamas egzaminas. Šį faktą pasakai tik tada, kai seniūnas paprašo konkretaus pavyzdžio. Sutinki, kad pirmiausia būtų parašyta dėstytojui, jei seniūnas tai pagrįstai pasiūlo."},
+{t:"Tyli grupė",a:"Į tavo apklausas grupės chate atsako tik 5 iš 27 žmonių. Kalbi su Ieva, kuri niekada nieko nerašo. Tavo tikslas: suprasti, kodėl grupė tyli, ir gauti bent vieną idėją.",bn:"Ieva",b:"Tyli, nes chate visada dominuoja tie patys trys žmonės, o kai kartą parašei savo nuomonę, iš jos pasijuokė. Iš pradžių atsakinėji „nežinau“, „man viskas tinka“. Atsiveri, kai seniūnas perfrazuoja arba paklausia apie tavo patirtį chate. Tavo pasiūlymas: anoniminės apklausos ir atskiras info kanalas."},
+{t:"Atstovams: komiteto posėdyje",a:"Esi studentų atstovas studijų krypties komitete. Apklausa parodė, kad 2 kurse trys moduliai atsiskaitymus turi tą pačią savaitę. Tavo tikslas: per 60 s pristatyti studentų poziciją (MANO, NES, SIŪLOM) ir susitarti dėl kito žingsnio.",bn:"komiteto pirmininkė Rasa",b:"Pradedi skeptiškai: „Studentai visada skundžiasi krūviu“, „apklausoje atsakė per mažai“. Slaptas motyvas: bijai, kad keičiant atsiskaitymų grafiką teks perdaryti modulių aprašus prieš išorinį vertinimą. Atsiveri, jei atstovas paklausia, kas tau svarbiausia ar kas trukdo, arba pasiūlo mažą bandomąjį žingsnį (pvz., suderinti vieno semestro atsiskaitymų kalendorių) ir pasisiūlo padėti."},
+{t:"Atstovams: po posėdžio",a:"Esi studentų atstovas Akademinėje taryboje. Po posėdžio prie tavęs prieina Lukas. Tavo tikslas: išklausyti, paaiškinti, kas nuspręsta, ir susitarti, kaip jis sužinos tolesnę eigą.",bn:"Lukas",b:"Kalbi piktai: „Jūs ten posėdžiuose tik sėdit, niekas nesikeičia.“ Slaptas motyvas: prieš pusmetį pildei apklausą apie bibliotekos darbo laiką, ir niekas nepranešė, kas iš to išėjo. Jautiesi, kad tavo nuomonė dingo. Atsiveri, jei atstovas nesiginčija, o paklausia, kas konkrečiai nutiko, ar pripažįsta, kad grįžtamojo ryšio trūko. Tada sutinki, kad geriausia būtų trumpa žinutė studentams po kiekvieno posėdžio."}
+];
+var OBS=["Pradėjo nuo santykio, ne nuo kaltinimo","Uždavė atvirą klausimą („Kas?“, „Kaip?“, „Kas sunkiausia?“)","Perfrazavo („Jei teisingai supratau…“)","Nepertraukinėjo, leido pabaigti mintį","F-P-P: faktas, poveikis, prašymas","Atstovams: MANO, NES, SIŪLOM per 60 s","Atrado slaptą motyvą","Susitarė dėl kito žingsnio ir termino"];
+var QUIZ=[
+{q:"Kuri tema geriausia laiškui dėstytojui?",o:["Klausimas","SKUBU!!!","MKT-25 grupė: prašymas perkelti kontrolinį į 11-04","(be temos)"],c:2,e:"Tema pasako, kas rašo, ko nori ir iki kada, todėl tokį laišką atidaro pirmą."},
+{q:"Kaip taisyklingai kreiptis į lektorių Martyną?",o:["Laba diena, Martynas,","Laba diena, Martynai,","Labas, Martynai,","Sveikas, dėstytojau,"],c:1,e:"Kreipiamės vardu ir šauksmininku: Martynas virsta Martynai, o Rasa lieka Rasa."},
+{q:"Chate gandas, kad rytoj paskaitos nebus. Ką darai pirmiausia?",o:["Parašai „neinam!“","Patikrini tvarkaraštį ir parašai dėstytojui","Nieko nedarai","Užtildai chatą"],c:1,e:"Patikrink šaltinį ir pasakyk grupei, kada bus atsakymas."},
+{q:"Ką galima kelti į grupės chatą be atskiro sutikimo?",o:["Grupiokų pažymių ekrano nuotrauką","Dėstytojo nuotrauką iš paskaitos","Nuorodą į pasirenkamųjų dalykų registraciją","Grupiokės telefono numerį"],c:2,e:"Pažymiai, nuotraukos ir kontaktai yra asmens duomenys."},
+{q:"Kokia F-P-P eilė sunkiame pokalbyje?",o:["Faktas, Poveikis, Prašymas","Fakultetas, Prodekanas, Pagalba","Frazė, Pauzė, Pabaiga","Faktas, Pyktis, Pasekmė"],c:0,e:"Faktas be etikečių, jo poveikis kitiems ir aiškus prašymas su terminu."},
+{q:"Dėstytojas per dieną neatsakė į laišką. Ką darai?",o:["Rašai dekanui","Siunti tą patį laišką dar 3 kartus","Palauki 2–3 darbo dienas ir primeni toje pačioje gijoje","Parašai grupei, kad dėstytojas ignoruoja"],c:2,e:"Mandagus priminimas toje pačioje gijoje, o ne skundas vadovybei."},
+{q:"Negali dalyvauti Akademinės tarybos posėdyje. Kaip perduoti studentų nuomonę?",o:["Paprašai draugo ją pasakyti","Parašai Studentų atstovybės chate","Raštu el. paštu AT pirmininkui iki posėdžio","Niekaip, balsas dingsta"],c:2,e:"Pagal AT reglamentą nuomonė pirmininkui el. paštu pateikiama ne vėliau kaip prieš 1 darbo dieną."},
+{q:"Kas posėdžio pasisakyme eina po „Studentai mano, kad…“?",o:["„Todėl reikalaujame…“","„Nes…“ su skaičiais ir pavyzdžiu","„Mano asmenine nuomone…“","„Visi žino, kad…“"],c:1,e:"MANO, NES, SIŪLOM: pozicija, įrodymas ir pasiūlymas per 60 sekundžių."}
+];
+
+var TASKS=[["1","Laiškų reanimacija","Diagnozė ir gydymas","12′"],["2","Chato krizė","3 sakiniai ir „už kadro“","12′"],["3","Trijulės","Slaptas motyvas","14′"],["4","Viktorina","8 klausimai","4′"],["5","Įsipareigojimas","Per 7 dienas aš…","2′"]];
+var tI=store.get("tI",0);
+function chips(){
+  $("#taskchips").innerHTML=TASKS.map(function(t,i){return '<button class="chip" type="button" data-i="'+i+'" aria-pressed="'+(i===tI)+'"><span class="n">'+t[0]+'</span>'+t[1]+'</button>'}).join("");
+}
+$("#taskchips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;tI=+b.getAttribute("data-i");store.set("tI",tI);chips();renderTask()});
+
+function caseChips(n,cur,key){var s='';for(var i=0;i<n;i++){s+='<button class="chip" type="button" data-'+key+'="'+i+'" aria-pressed="'+(i===cur)+'"><span class="n">'+(i+1)+'</span></button>'}return '<div class="chips" role="group">'+s+'</div>'}
+
+/* task 1 */
+var c1=store.get("c1",0);
+function task1(){
+  var c=CASES[c1];var d=store.get("diag"+c1,{});var draft=store.get("draft"+c1,{s:"",b:""});
+  var hdr=c.h.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join("");
+  var tiles=LB_LET.map(function(l,i){return '<button type="button" class="tile'+(d[i]?" miss":"")+'" data-l="'+i+'" aria-pressed="'+(!!d[i])+'">'+l[0]+'<small>'+l[1]+'</small></button>'}).join("");
+  $("#taskbody").innerHTML='<div class="sec-head"><h2>Laiškų reanimacija</h2><p>Komanda gauna vieną atvejį. 2 min. diagnozei, 6 min. gydymui. 5 atvejis skirtas studentų atstovams savivaldoje.</p></div>'+
+   caseChips(CASES.length,c1,"c")+
+   '<div class="env sick"><dl class="env-h">'+hdr+'</dl><div class="env-b">'+esc(c.b)+'</div>'+(c.meta?'<div class="meta">'+esc(c.meta)+'</div>':'')+'</div>'+
+   '<p><strong>Užduotis.</strong> '+esc(c.task)+'</p>'+
+   '<div class="card"><h3>Diagnozė: paspauskite raides, kurių trūksta</h3><div class="tiles" id="diag">'+tiles+'</div><p class="small muted" id="diagN"></p></div>'+
+   '<div class="card"><h3>Gydymas</h3><div class="field"><label for="drS">Nauja tema</label><input type="text" id="drS"></div><div class="field"><label for="drB">Laiškas (iki 120 žodžių)</label><textarea id="drB" rows="9" placeholder="Laba diena, …"></textarea><span class="counter" id="drN"></span></div><p class="small muted">Pataisytą laišką parodysite lektoriui, o jis turės 30 sekundžių suprasti, ko prašote ir iki kada.</p></div>';
+  $("#drS").value=draft.s;$("#drB").value=draft.b;
+  function upd(){var n=words($("#drB").value);var el=$("#drN");el.textContent=n+" / 120 žod.";el.classList.toggle("over",n>120);store.set("draft"+c1,{s:$("#drS").value,b:$("#drB").value})}
+  $("#drS").addEventListener("input",upd);$("#drB").addEventListener("input",upd);upd();
+  function dn(){var k=Object.keys(d).filter(function(x){return d[x]}).length;$("#diagN").textContent=k?("Pažymėta trūkstamų raidžių: "+k+" iš 7."):"Geltona žymi tai, ko laiške trūksta."}
+  dn();
+  $("#diag").addEventListener("click",function(e){var b=e.target.closest(".tile");if(!b)return;var i=b.getAttribute("data-l");d[i]=!d[i];store.set("diag"+c1,d);b.classList.toggle("miss",d[i]);b.setAttribute("aria-pressed",d[i]);dn()});
+  $$('[data-c]',$("#taskbody")).forEach(function(b){b.addEventListener("click",function(){c1=+b.getAttribute("data-c");store.set("c1",c1);task1()})});
+}
+/* task 2 */
+var c2=store.get("c2",0);
+function task2(){
+  var c=CHATS[c2];var a=store.get("ans"+c2,{r:"",k:""});
+  var msgs=c.m.map(function(m){return '<div class="msg"><div class="who">'+esc(m[0])+'</div><div class="b'+(m[2]?" img":"")+'">'+esc(m[1])+'</div></div>'}).join("");
+  $("#taskbody").innerHTML='<div class="sec-head"><h2>Chato krizė</h2><p>Kiekvienai situacijai 2 min. Pagrindinis raundas: 1, 3, 4 ir 6 (atstovams), o 2 ir 5 yra atsarginės.</p></div>'+
+   caseChips(CHATS.length,c2,"h")+
+   '<div class="chat"><div class="chat-top"><span>'+esc(c.title)+'</span><span>'+esc(c.time)+'</span></div>'+msgs+'<div class="msg me"><div class="who">Jūs</div><div class="b" id="meB">…</div></div></div>'+
+   '<div class="card"><div class="field"><label for="anR">Jūsų atsakymas chate</label><textarea id="anR" rows="3" placeholder="Ne daugiau kaip 3 sakiniai"></textarea><span class="counter" id="anN"></span></div>'+
+   '<div class="field"><label for="anK">Ką darote „už kadro“?</label><textarea id="anK" rows="3" placeholder="Kam parašote asmeniškai, ką patikrinate, ką darote po to"></textarea></div></div>';
+  $("#anR").value=a.r;$("#anK").value=a.k;
+  function upd(){var t=$("#anR").value.trim();var n=(t.match(/[^.!?]+[.!?]*/g)||[]).filter(function(s){return s.trim().length>1}).length;var el=$("#anN");el.textContent=n+" / 3 sakiniai";el.classList.toggle("over",n>3);$("#meB").textContent=t||"…";store.set("ans"+c2,{r:$("#anR").value,k:$("#anK").value})}
+  $("#anR").addEventListener("input",upd);$("#anK").addEventListener("input",upd);upd();
+  $$('[data-h]',$("#taskbody")).forEach(function(b){b.addEventListener("click",function(){c2=+b.getAttribute("data-h");store.set("c2",c2);task2()})});
+}
+/* task 3 */
+var c3=store.get("c3",0),r3=store.get("r3","A"),bOpen=false;
+function task3(){
+  var s=ROLES[c3];var obs=store.get("obs"+c3,{});var ph=store.get("ph"+c3,{a:"",b:""});
+  var body='';
+  if(r3==="A")body='<div class="role"><div class="rl">A</div><h3>Seniūnas arba atstovas</h3><p>'+esc(s.a)+'</p><p class="small muted">Naudokite atviruosius klausimus ir perfrazavimą. Prašymą formuluokite pagal F-P-P'+(c3>=5?' arba MANO, NES, SIŪLOM':'')+'.</p></div>';
+  else if(r3==="B")body=bOpen?'<div class="role b"><div class="rl">B</div><h3>Jūs esate '+esc(s.bn)+'</h3><p>'+esc(s.b)+'</p><p class="small muted">Slaptą motyvą atskleiskite tik tada, kai seniūnas ar atstovas užduoda atvirą klausimą arba perfrazuoja.</p></div>':
+    '<div class="secret"><h3>B kortelė slapta</h3><p class="small">Ją skaito tik B. Jei esate A arba C, grįžkite atgal.</p><button class="btn primary" id="openB">Esu B, rodyti kortelę</button></div>';
+  else body='<div class="card"><div class="row" style="justify-content:space-between"><h3>Stebėtojo lapas</h3><span class="pill good" id="obsN"></span></div><div class="check" id="obsL">'+OBS.map(function(o,i){return '<label><input type="checkbox" id="ob'+i+'" data-o="'+i+'"'+(obs[i]?" checked":"")+'><span>'+esc(o)+'</span></label>'}).join("")+'</div>'+
+    '<div class="field"><label for="phA">Frazė, kuri suveikė</label><input type="text" id="phA"></div><div class="field"><label for="phB">Frazė, kurią keisčiau</label><input type="text" id="phB"></div><p class="small muted">Po pokalbio per 2 min. pasakykite: vieną dalyką, kuris suveikė, ir vieną, kurį keistumėte.</p></div>';
+  $("#taskbody").innerHTML='<div class="sec-head"><h2>Trijulės su slaptu motyvu</h2><p>A yra seniūnas ar atstovas, B kitas žmogus, C stebėtojas. 2 raundai po 4 min. pokalbio ir 2 min. grįžtamojo ryšio. 6 ir 7 scenarijai skirti atstovams.</p></div>'+
+   caseChips(ROLES.length,c3,"s")+'<h3>'+(c3+1)+'. '+esc(s.t)+'</h3>'+
+   '<div class="chips" role="group" aria-label="Vaidmuo">'+["A","B","C"].map(function(r){return '<button class="chip" type="button" data-r="'+r+'" aria-pressed="'+(r===r3)+'">'+(r==="A"?"A, seniūnas ar atstovas":r==="B"?"B, kitas žmogus":"C, stebėtojas")+'</button>'}).join("")+'</div>'+body;
+  $$('[data-s]',$("#taskbody")).forEach(function(b){b.addEventListener("click",function(){c3=+b.getAttribute("data-s");store.set("c3",c3);bOpen=false;task3()})});
+  $$('[data-r]',$("#taskbody")).forEach(function(b){b.addEventListener("click",function(){r3=b.getAttribute("data-r");store.set("r3",r3);bOpen=false;task3()})});
+  var ob=$("#openB");if(ob)ob.addEventListener("click",function(){bOpen=true;task3()});
+  var ol=$("#obsL");if(ol){
+    var cnt=function(){$("#obsN").textContent=Object.keys(obs).filter(function(k){return obs[k]}).length+" / "+OBS.length};cnt();
+    ol.addEventListener("change",function(e){var i=e.target.getAttribute("data-o");obs[i]=e.target.checked;store.set("obs"+c3,obs);cnt()});
+    $("#phA").value=ph.a;$("#phB").value=ph.b;
+    var sv=function(){store.set("ph"+c3,{a:$("#phA").value,b:$("#phB").value})};$("#phA").addEventListener("input",sv);$("#phB").addEventListener("input",sv);
+  }
+}
+/* task 4: quiz */
+var qz={i:-1,pts:0,right:0,timer:null,t0:0,answered:false,start:0};
+var QT=20;
+function task4(){
+  clearInterval(qz.timer);
+  var name=(store.get("team","")||"Jūsų komanda");
+  if(qz.i<0){
+    $("#taskbody").innerHTML='<div class="sec-head"><h2>Viktorina</h2><p>8 klausimai, po 20 sekundžių. Komanda žaidžia vienu telefonu. Taškai skiriami už teisingą atsakymą ir greitį.</p></div><div class="card"><p><strong>Komanda:</strong> '+esc(name)+'</p><button class="btn primary" id="qStart">Pradėti viktoriną</button></div>';
+    $("#qStart").addEventListener("click",function(){qz={i:0,pts:0,right:0,timer:null,answered:false,start:Date.now()};task4()});
+    return;
+  }
+  if(qz.i>=QUIZ.length){
+    var sec=Math.round((Date.now()-qz.start)/1000);
+    $("#taskbody").innerHTML='<div class="card" style="align-items:center;text-align:center;gap:8px"><div class="eyebrow">'+esc(name)+'</div><div class="score">'+qz.pts+'</div><p><strong>'+qz.right+' iš '+QUIZ.length+'</strong> teisingai per '+Math.floor(sec/60)+':'+String(sec%60).padStart(2,"0")+'</p><p class="small muted">Pakelkite telefoną, kai lektorius paprašys.</p><button class="btn" id="qAgain">Žaisti iš naujo</button></div>';
+    store.set("quizBest",Math.max(store.get("quizBest",0),qz.pts));
+    $("#qAgain").addEventListener("click",function(){qz.i=-1;task4()});
+    return;
+  }
+  var q=QUIZ[qz.i];qz.answered=false;qz.t0=Date.now();
+  $("#taskbody").innerHTML='<div class="row" style="justify-content:space-between"><span class="eyebrow">Klausimas '+(qz.i+1)+' / '+QUIZ.length+'</span><span class="counter">'+qz.pts+' tšk.</span></div><div class="qbar"><i id="qbar"></i></div><h2>'+esc(q.q)+'</h2><div class="qopts">'+q.o.map(function(o,i){return '<button class="qopt" type="button" data-a="'+i+'"><span class="l">'+"ABCD"[i]+'</span><span>'+esc(o)+'</span></button>'}).join("")+'</div><div id="qExp"></div>';
+  function finish(sel){
+    if(qz.answered)return;qz.answered=true;clearInterval(qz.timer);
+    var left=Math.max(0,QT-(Date.now()-qz.t0)/1000);
+    var ok=sel===q.c;if(ok){qz.right++;qz.pts+=500+Math.round(500*left/QT)}
+    $$(".qopt").forEach(function(b){var i=+b.getAttribute("data-a");b.disabled=true;if(i===q.c)b.classList.add("right");else if(i===sel)b.classList.add("wrong")});
+    $("#qExp").innerHTML='<div class="card"><span class="pill '+(ok?"good":"bad")+'">'+(ok?"Teisingai":(sel<0?"Laikas baigėsi":"Ne visai"))+'</span><p>'+esc(q.e)+'</p><button class="btn primary" id="qNext">'+(qz.i===QUIZ.length-1?"Rezultatas":"Kitas klausimas")+'</button></div>';
+    $("#qNext").addEventListener("click",function(){qz.i++;task4()});
+  }
+  $$(".qopt").forEach(function(b){b.addEventListener("click",function(){finish(+b.getAttribute("data-a"))})});
+  qz.timer=setInterval(function(){var el=(Date.now()-qz.t0)/1000;var bar=$("#qbar");if(bar)bar.style.width=Math.max(0,100-el/QT*100)+"%";if(el>=QT)finish(-1)},100);
+}
+/* task 5 */
+var SUG=["Prisegsiu grupės chato taisykles","Susikursiu el. pašto parašą su pareigomis","Parašysiu prisistatymo laišką katedrai ar dekanatui","Atskirsiu „info“ kanalą nuo pokalbių","Perskaitysiu artimiausio posėdžio darbotvarkę ir pažymėsiu studentų klausimus","Paruošiu 3 klausimų apklausą studentams","Po posėdžio parašysiu žinutę „Kas nuspręsta“"];
+function task5(){
+  var d=new Date();d.setDate(d.getDate()+7);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  $("#taskbody").innerHTML='<div class="sec-head"><h2>Mano įsipareigojimas</h2><p>Vienas konkretus veiksmas, kurį padarysite iki '+ltDate(iso)+'</p></div>'+
+   '<div class="card"><div class="field"><label for="pledge">Per 7 dienas aš…</label><textarea id="pledge" rows="3"></textarea></div><div class="phr" id="sug"></div><div class="row"><button class="btn primary" id="plCopy">Kopijuoti</button><span class="small muted">Arba nufotografuokite ekraną.</span></div></div>';
+  $("#pledge").value=store.get("pledge","");
+  $("#pledge").addEventListener("input",function(){store.set("pledge",$("#pledge").value)});
+  $("#sug").innerHTML=SUG.map(function(s){return '<button type="button" data-s="'+esc(s)+'"><span>'+esc(s)+'</span><span class="c">įrašyti</span></button>'}).join("");
+  $("#sug").addEventListener("click",function(e){var b=e.target.closest("button[data-s]");if(!b)return;e.stopPropagation();$("#pledge").value=b.getAttribute("data-s")+".";store.set("pledge",$("#pledge").value)});
+  $("#plCopy").addEventListener("click",function(){copyText("Per 7 dienas (iki "+ltDate(iso)+") aš: "+$("#pledge").value.trim())});
+}
+function renderTask(){[task1,task2,task3,task4,task5][tI]()}
+chips();renderTask();
+})();
+</script>
+
+</body>
+</html>
